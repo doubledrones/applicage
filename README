@@ -1,0 +1,3 @@
+MacPorts source overlay designed to "cage" applications within user home directory
+
+This mean root-independent work on any Mac.
