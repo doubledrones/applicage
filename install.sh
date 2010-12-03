@@ -5,7 +5,7 @@ MACPORTS_VERSION="1.9.2"
 
 CACHE_DIR="$HOME/Library/Caches/AppliCage"
 
-APPLICAGE_ROOT=`dirname $0`
+APPLICAGE_ROOT=`cd \`dirname $0\` ; pwd -P`
 
 if [ ! -d $MACPORTS_DIR ]; then
   if [ ! -d $CACHE_DIR ]; then
