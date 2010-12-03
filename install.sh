@@ -1,9 +1,49 @@
 #!/bin/sh
 
-cd `dirname $0`
-
 MACPORTS_DIR="$HOME/.macports"
+MACPORTS_VERSION="1.9.2"
 
+CACHE_DIR="$HOME/Library/Caches/AppliCage"
+
+APPLICAGE_ROOT=`dirname $0`
+
+if [ ! -d $MACPORTS_DIR ]; then
+  if [ ! -d $CACHE_DIR ]; then
+    mkdir -p $CACHE_DIR
+  fi
+
+  cd $CACHE_DIR
+  if [ ! -f MacPorts-$MACPORTS_VERSION.tar.bz2.ok ]; then
+    curl http://distfiles.macports.org/MacPorts/MacPorts-$MACPORTS_VERSION.tar.bz2 -o MacPorts-$MACPORTS_VERSION.tar.bz2
+    tar xvjf $CACHE_DIR/MacPorts-$MACPORTS_VERSION.tar.bz2 -C /tmp/
+    touch MacPorts-$MACPORTS_VERSION.tar.bz2.ok
+  else
+    tar xvjf $CACHE_DIR/MacPorts-$MACPORTS_VERSION.tar.bz2 -C /tmp/
+  fi
+
+  cd /tmp/MacPorts-$MACPORTS_VERSION
+
+  ./configure \
+    --with-no-root-privileges \
+    --prefix=$MACPORTS_DIR \
+    --enable-readline \
+    --with-install-user=`id -un` \
+    --with-install-group=`id -gn` \
+    --with-tclpackage=$MACPORTS_DIR/share/macports/Tcl
+
+  make
+  make install
+
+  cd
+
+  export PATH="~/.macports/bin:$PATH"
+
+  port -v selfupdate
+
+  rm -rf /tmp/MacPorts-$MACPORTS_VERSION
+fi
+
+cd $APPLICAGE_ROOT
 
 MACPORTS_SOURCE_DIR="$MACPORTS_DIR/var/macports/sources/applicage"
 if [ ! -L $MACPORTS_SOURCE_DIR ]; then
