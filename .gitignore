@@ -1,2 +1,4 @@
 .DS_Store
 *.swp
+sources/release/ports/PortIndex
+sources/release/ports/PortIndex.quick
