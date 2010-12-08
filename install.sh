@@ -43,6 +43,8 @@ if [ ! -d $MACPORTS_DIR ]; then
   rm -rf /tmp/MacPorts-$MACPORTS_VERSION
 fi
 
+echo "-doc +no_x11 +no_java -ipv6" > $MACPORTS_DIR/etc/macports/variants.conf
+
 cd $APPLICAGE_ROOT
 
 MACPORTS_SOURCE_DIR="$MACPORTS_DIR/var/macports/sources/applicage"
