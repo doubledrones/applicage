@@ -45,6 +45,8 @@ fi
 
 echo "-doc +no_x11 +no_java -ipv6" > $MACPORTS_DIR/etc/macports/variants.conf
 
+echo "buildmakejobs `osx-makejobs`" > $MACPORTS_DIR/macports.conf
+
 cd $APPLICAGE_ROOT
 
 MACPORTS_SOURCE_DIR="$MACPORTS_DIR/var/macports/sources/applicage"
