@@ -36,7 +36,7 @@ if [ ! -d $MACPORTS_DIR ]; then
 
   cd
 
-  export PATH="~/.macports/bin:$PATH"
+  export PATH="$MACPORTS_DIR/bin:$PATH"
 
   port -v selfupdate
 
