@@ -1,0 +1,31 @@
+PortSystem          1.0
+
+name                Things.app
+version             1.4.3
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         Things.app is a productivity application for GTD system
+homepage            http://code.google.com/p/macvim #TODO
+master_sites        http://culturedcode.cachefly.net/things/
+distname            Things_${version}
+
+checksums           md5     6f71699b25d40a6dbf7ca63fe673d933 \
+                    sha1    6700ae6fb2398c000f6fab16b229db0648dbada9 \
+                    rmd160  d24238c3783192e4c16364d0f3a4f7d7cae70b70
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${worksrcpath} ${destroot}${applications_dir}
+}
