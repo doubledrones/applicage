@@ -6,7 +6,7 @@ categories          office
 platforms           darwin
 maintainers         pr0d1r2
 description         1Password.app is a productivity application for easy password storage
-homepage            http://code.google.com/p/macvim #TODO
+homepage            http://agilewebsolutions.com/onepassword
 master_sites        http://cdn.agile.ws/aws/dmg/1PW3/English/
 distname            1Password-${version}
 

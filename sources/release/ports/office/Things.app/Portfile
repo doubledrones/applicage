@@ -6,7 +6,7 @@ categories          office
 platforms           darwin
 maintainers         pr0d1r2
 description         Things.app is a productivity application for GTD system
-homepage            http://code.google.com/p/macvim #TODO
+homepage            http://culturedcode.com/things/
 master_sites        http://culturedcode.cachefly.net/things/
 distname            Things_${version}
 
