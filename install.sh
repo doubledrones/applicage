@@ -48,7 +48,10 @@ if [ ! -d $MACPORTS_DIR/etc/macports ]; then
 fi
 echo "-doc +no_x11 +no_java -ipv6" > $MACPORTS_DIR/etc/macports/variants.conf
 
-echo "buildmakejobs `osx-makejobs`" > $MACPORTS_DIR/macports.conf
+CPU_NUM=`ioreg | grep CPU.@ | wc -l | sed -e 's/ //g'`
+MAKEJOBS=`expr \`expr $CPU_NUM \* 2\` + 1`
+
+echo "buildmakejobs $MAKEJOBS" > $MACPORTS_DIR/macports.conf
 
 cd $APPLICAGE_ROOT
 
