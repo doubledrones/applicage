@@ -43,6 +43,9 @@ if [ ! -d $MACPORTS_DIR ]; then
   rm -rf /tmp/MacPorts-$MACPORTS_VERSION
 fi
 
+if [ ! -d $MACPORTS_DIR/etc/macports ]; then
+  mkdir -p $MACPORTS_DIR/etc/macports
+fi
 echo "-doc +no_x11 +no_java -ipv6" > $MACPORTS_DIR/etc/macports/variants.conf
 
 echo "buildmakejobs `osx-makejobs`" > $MACPORTS_DIR/macports.conf
