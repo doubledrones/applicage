@@ -1,0 +1,22 @@
+PortSystem 1.0
+
+name			simpleproxy
+version			3.4
+categories		net
+platforms		darwin
+maintainers		pr0d1r2
+description		simple proxy used to forwarding ports
+long_description	${description}
+default_variants +homedir
+
+homepage		http://sourceforge.net/projects/simpleproxy/
+master_sites		sourceforge
+
+checksums           md5     95fbc83e731f4c727802e023cf3d43ad \
+                    sha1    ec98a2e622507f5b6ecdbbe0b50d2fc82480bcc2 \
+                    rmd160  c2427e6fcc1f6ea40440b8d396d22fde68f0eaf8
+
+destroot {
+  file mkdir ${destroot}${prefix}/bin
+  xinstall -m 755 ${worksrcpath}/simpleproxy ${destroot}${prefix}/bin/simpleproxy
+}
