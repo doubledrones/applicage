@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                TVShows.app
+version             0.4.8r2
+categories          multimedia
+platforms           darwin
+maintainers         pr0d1r2
+description         TVShows.app is a downloader for new TV series
+homepage            http://embercode.com/tvshows/
+master_sites        http://embercode.com/tvshows/_stable/
+distname            TVShows_${version}
+
+checksums           md5     ae07631afed84e283e96e65e5d88b179 \
+                    sha1    3a1663c67b3969508b6c4d1a118c41816ea96cbd \
+                    rmd160  3db40255bfb29b8174beaf231d17d6ab27fc0b90
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot {
+    copy ${workpath}/${distname}/${name} ${destroot}${applications_dir}
+}
