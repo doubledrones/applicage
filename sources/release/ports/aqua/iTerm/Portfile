@@ -1,0 +1,30 @@
+PortSystem 1.0
+PortGroup xcode 1.0
+
+name iTerm
+set svntag alpha16
+version 2.0.0-$svntag
+categories aqua shells
+maintainers pr0d1r2
+description Enhanced terminal emulator program for Mac OS X
+long_description \
+  iTerm is a full featured terminal emulation program written \
+  for OS X using Cocoa. We are aiming at providing users with \
+  best command line experience under OS X. The letter i \
+  represents a native Apple look and feel of the program \
+  interface, and an emphasis on complete international support.
+
+homepage http://code.google.com/p/iterm2/
+
+fetch.type svn
+svn.url http://iterm2.googlecode.com/svn/tags/$svntag/
+worksrcdir ${svntag}
+
+xcode.project ${name}.xcodeproj
+xcode.target ${name}
+xcode.build.settings MACOSX_DEPLOYMENT_TARGET=10.5 SDKROOT=${developer_dir}/SDKs/MacOSX10.5.sdk
+
+destroot {
+  file copy ${build.dir}/build/Deployment/${name}.app \
+    ${destroot}${applications_dir}/${name}.app
+}
