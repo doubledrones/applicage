@@ -2,6 +2,8 @@ MacPorts source overlay designed to "cage" applications within user home directo
 
 This mean root-independent work on any Mac.
 
+This package install macports within ~/.macports directory.
+
 Usage:
 
 1) run following command on Terminal:
