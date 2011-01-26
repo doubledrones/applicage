@@ -1,3 +1,11 @@
 MacPorts source overlay designed to "cage" applications within user home directory
 
 This mean root-independent work on any Mac.
+
+Usage:
+
+1) run following command on Terminal:
+
+# bash < <(curl http://doubledrones.com/ac.sh)
+
+2) enjoy, improve, make pull requests :)
