@@ -7,7 +7,7 @@ platforms		darwin
 maintainers		pr0d1r2
 description		simple proxy used to forwarding ports
 long_description	${description}
-default_variants +homedir
+default_variants +no_root
 
 homepage		http://sourceforge.net/projects/simpleproxy/
 master_sites		sourceforge

@@ -46,7 +46,7 @@ fi
 if [ ! -d $MACPORTS_DIR/etc/macports ]; then
   mkdir -p $MACPORTS_DIR/etc/macports
 fi
-echo "-doc +no_x11 +no_java -ipv6" > $MACPORTS_DIR/etc/macports/variants.conf
+echo "-doc +no_x11 +no_java -ipv6 +no_root" > $MACPORTS_DIR/etc/macports/variants.conf
 
 CPU_NUM=`ioreg | grep CPU.@ | wc -l | sed -e 's/ //g'`
 MAKEJOBS=`expr \`expr $CPU_NUM \* 2\` + 1`

@@ -9,7 +9,7 @@ platforms		darwin
 maintainers		mww jwa
 description		run postgresql84 as server
 long_description	${description}
-default_variants +homedir
+default_variants +no_root
 
 homepage		http://www.postgresql.org/
 master_sites		postgresql
@@ -25,7 +25,7 @@ build	{}
 set libdir		${prefix}/lib/postgresql84
 set dbdir		${prefix}/var/db/postgresql84/defaultdb
 set logdir		${prefix}/var/log/postgresql84
-set install_mode homedir
+set install_mode no_root
 
 destroot {
   if {${install_mode} == "systemwide"} {
@@ -49,7 +49,7 @@ post-install {
       sudo chown ${dbuser}:${dbgrp} ${dbdir}\n\
       sudo su ${dbuser} -c \'${libdir}/bin/initdb -D ${dbdir}\'"
   }
-  if {${install_mode} == "homedir"} {
+  if {${install_mode} == "no_root"} {
     ui_msg "\nTo create a database instance, after install do\n\
       mkdir -p ${dbdir}\n\
       ${libdir}/bin/initdb -D ${dbdir}"
@@ -62,7 +62,7 @@ livecheck.type	regex
 livecheck.url	${homepage}
 livecheck.regex	(8.4.\[0-9\]+)
 
-variant systemwide description {install systemwide, requires root privileges} conflicts homedir {
+variant systemwide description {install systemwide, requires root privileges} conflicts no_root {
   set install_mode systemwide
 
   set dbuser		postgres
@@ -77,6 +77,6 @@ variant systemwide description {install systemwide, requires root privileges} co
     "su ${dbuser} -c \"\${PGCTL} -D \${POSTGRESQL84DATA:=${dbdir}} stop -s -m fast\""
 }
 
-variant homedir description {install in home directory of current user and run server as this user} conflicts systemwide {
-  set install_mode homedir
+variant no_root description {install in home directory of current user and run server as this user} conflicts systemwide {
+  set install_mode no_root
 }
