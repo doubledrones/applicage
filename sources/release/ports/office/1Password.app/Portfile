@@ -1,7 +1,7 @@
 PortSystem          1.0
 
 name                1Password.app
-version             3.5.3
+version             3.5.4
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
@@ -10,9 +10,9 @@ homepage            http://agilewebsolutions.com/onepassword
 master_sites        http://cdn.agile.ws/aws/dmg/1PW3/English/
 distname            1Password-${version}
 
-checksums           md5     37ad8ed552d928a6a9481934f74c47dc \
-                    sha1    26f98272c8cf527b34991ae8ea1ac784edbb02fb \
-                    rmd160  8c6437d65a1e0f38a58eb3330f65fb8a96fc5ba4
+checksums           md5     532732b6c3d916076aa7a0aabff4c82b \
+                    sha1    7b230ebca741addd2a736200e308c5e2e875519b \
+                    rmd160  5d2da84bdb0bc8efddbc34f02383ed0e52e68174
 use_zip             yes
 worksrcdir          ${name}
 
