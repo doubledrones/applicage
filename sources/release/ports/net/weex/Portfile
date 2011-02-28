@@ -1,0 +1,24 @@
+# $Id: Portfile 41073 2008-10-22 06:56:21Z blb@macports.org $
+
+PortSystem 1.0
+name			weex
+version			2.6.1.5
+description		FTP synchronisation tool for web sites
+long_description	\
+  Weex is an utility designed to automate the task of \
+  remotely maintaining a web site or other FTP archive. \
+  It will synchronize a set of local files to a remote \
+  server by performing uploads and remote deletes \
+  as required.
+maintainers		pr0d1r2, h13ronim
+categories		net
+platforms		darwin
+homepage		http://sourceforge.net/projects/weex/
+master_sites	sourceforge
+checksums           md5     c10192608ab9f715c4c1ea63cf6ad2da \
+                    sha1    eab3560cc75265bd96bac52f08d81f3d735696f0 \
+                    rmd160  adf792c92f95799cfde9d96a54de006ebc840aca
+patchfiles weex-2.6.1.5-macosx.patch
+configure.args  mandir=${prefix}/share/man
+
+configure.cflags-append "-D__unix__"

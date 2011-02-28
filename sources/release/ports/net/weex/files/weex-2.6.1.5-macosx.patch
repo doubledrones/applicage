@@ -1,0 +1,33 @@
+diff -urN src/log.c src/log.c
+--- src/log.c	2003-08-18 11:52:38.000000000 +0200
++++ src/log.c	2011-02-28 19:56:51.000000000 +0100
+@@ -183,7 +183,7 @@
+ 
+ 	fp=log_open();
+ 	for(i=0;i<max_log;i++){
+-		fprintf(fp,log_str[i]);
++		fprintf(fp,"%s",log_str[i]);
+ 		free(log_str[i]);
+ 	}
+ 	free(log_str);
+diff -urN src/strlib.c src/strlib.c
+--- src/strlib.c	2003-08-18 11:52:38.000000000 +0200
++++ src/strlib.c	2011-02-28 19:56:19.000000000 +0100
+@@ -38,16 +38,9 @@
+ #define TRUE 1
+ 
+ #if !defined (G_VA_COPY)
+-#  if defined (__GNUC__) && defined (__PPC__) && (defined (_CALL_SYSV) || defined (_WIN32)) || defined(__s390__)
+-#  define G_VA_COPY(ap1, ap2)     (*(ap1) = *(ap2))
+-#  elif defined (G_VA_COPY_AS_ARRAY)
+-#  define G_VA_COPY(ap1, ap2)     g_memmove ((ap1), (ap2), sizeof (va_list))
+-#  else /* va_list is a pointer */
+-#  define G_VA_COPY(ap1, ap2)     ((ap1) = (ap2))
+-#  endif /* va_list is a pointer */
++# define G_VA_COPY __va_copy
+ #endif /* !G_VA_COPY */
+ 
+-
+ /* --------------------------------------------------
+  NAME       str_malloc
+  FUNCTION   allocate memory with checking
