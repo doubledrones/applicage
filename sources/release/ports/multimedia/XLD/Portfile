@@ -1,0 +1,35 @@
+# $Id: Portfile 75717 2011-02-05 11:48:50Z jwa@macports.org $
+
+PortSystem 1.0
+
+name			XLD
+version			20110312
+
+categories		multimedia
+platforms		darwin
+maintainers		pr0d1r2
+description		X Lossless Decoder is a various lossless codec decoder
+
+homepage		http://tmkk.pv.land.to/xld/index_e.html
+master_sites		http://xld.googlecode.com/files/
+distname		xld-gui-${version}
+
+checksums           md5     66886a07f155b72c10fa1743232b49ac \
+                    sha1    cccf21fcea0ef91d0b32cdfa4da5482aa8971caa \
+                    rmd160  cda9adee73befe81a37c42e5e17fb2ec14eb154b
+
+use_bzip2		yes
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${worksrcpath}/XLD.app ${destroot}${applications_dir}
+}
