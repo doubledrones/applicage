@@ -1,0 +1,31 @@
+PortSystem          1.0
+
+name                cue-splitter
+version             2.6
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         cue-splitter is a CUE sheet splitter with FLAC support
+homepage            http://www.macupdate.com/app/mac/13093/cue-splitter
+master_sites        http://applicage-assets.heroku.com/
+distname            cue-splitter_v${version}
+
+checksums           md5     cc2480036097d81e4077db1b2efce72c \
+                    sha1    8973ef4172bb458730886eb5b899776401d010dc \
+                    rmd160  d12b69bb308591f32ac9b5338bda479e73176a7a
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${workpath}/cue-splitter.app ${destroot}${applications_dir}
+}
