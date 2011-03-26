@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                Caffeine
+version             1.1.1
+categories          aqua
+platforms           darwin
+maintainers         pr0d1r2
+description         Caffeine do not let your Mac asleep
+homepage            http://lightheadsw.com/caffeine/
+master_sites        http://files.lightheadsw.com/releases/com.lightheadsw.Caffeine/
+distname            Caffeine${version}
+
+checksums           md5     2a51d34fa60ad7ebf548de9512d003d5 \
+                    sha1    d2fbdad1619934313026fc831e6c6e3dd97ac030 \
+                    rmd160  dc20d6215976428b6d7e7b1c1d8223ebc37d1e94
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${workpath}/Caffeine.app ${destroot}${applications_dir}
+}
