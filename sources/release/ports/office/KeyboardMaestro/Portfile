@@ -1,0 +1,35 @@
+PortSystem          1.0
+
+set version_major 4
+set version_minor 3
+set version_patch 2
+
+name                KeyboardMaestro
+version             ${version_major}.${version_minor}.${version_patch}
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         KeyboardMaestro is a productivity application for quick macros
+homepage            http://www.keyboardmaestro.com/
+master_sites        http://files.stairways.com/
+distname            keyboardmaestro-${version_major}${version_minor}${version_patch}
+
+checksums           md5     f0f2a8c9a3365f77886ceec56454178c \
+                    sha1    07d3df50cbe877c98c4af985c32458e0c4f97a8b \
+                    rmd160  f305ad126221307f3301fd0be36f4370dd287520
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${workpath}/Keyboard\ Maestro.app ${destroot}${applications_dir}
+}
