@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                NetworkLocation
+version             3.1.4
+categories          net
+platforms           darwin
+maintainers         pr0d1r2
+description         NetworkLocation is a location aware macro runner
+homepage            http://networklocationapp.com/
+master_sites        http://networklocationapp.com/release/
+distname            NetworkLocation_${version}
+
+checksums           md5     b6685e547bb12426b6d7bb5cf361640c \
+                    sha1    0e32bf1639cef129be938a3800600bc2768aa664 \
+                    rmd160  686b786d6ebe859706a2c8d7f3278b817855a5e8
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${worksrcpath}.app ${destroot}${applications_dir}
+}
