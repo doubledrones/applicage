@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        Alfred
+version                     0.8.2_107
+platforms                   macosx
+categories                  office
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Quick launcher
+
+homepage                    http://www.alfredapp.com/
+master_sites                http://media.alfredapp.com/
+
+use_dmg                     yes
+distname                    alfred_${version}
+
+checksums           md5     1d61037e775c71b09d6ce3a84da1b5e4 \
+                    sha1    c3a8a9806dc18077444ceca8f5f9bebf1c69a71d \
+                    rmd160  e9118d530a3df0688624c80714e7169cf97bf076
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
