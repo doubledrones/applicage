@@ -1,0 +1,43 @@
+PortSystem                  1.0
+
+name                        Dropbox
+version                     1.0.20
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Distributed network filesystem
+
+homepage                    https://www.dropbox.com/
+master_sites                http://cdn.dropbox.com/
+
+use_dmg                     yes
+distname                    ${name}-${version}
+
+checksums           md5     ed203901fb3ce4f898ec3220ee0628c6 \
+                    sha1    3384b4bdc1ffa9612cb249071783e42663a7ff77 \
+                    rmd160  dee5ed0a687ee87e7ca5a3a51ca3f3f020692850
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+fetch {
+    if {![file isdirectory ${distpath}]} {
+        file mkdir ${distpath}
+    }
+    system "curl ${master_sites}${name}%20${version}${extract.suffix} -o ${distpath}/${distname}${extract.suffix}"
+}
+
+destroot {
+    copy ${worksrcpath}/${name}.app ${destroot}${applications_dir}
+}
