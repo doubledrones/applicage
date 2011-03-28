@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        MozillaPrism
+version                     1.0b4
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 SSB builder on Mozilla Engine - with separate authorization
+
+homepage                    http://prism.mozillalabs.com/
+master_sites                http://prism.mozillalabs.com/downloads/${version}/
+
+use_dmg                     yes
+distname                    prism-${version}.en-US.mac
+
+checksums           md5     1f00ddcb9f0c932f8d3bd9ad94720953 \
+                    sha1    4566d7efa2cc8782c6a00f91b4a8f4bfa4f29d37 \
+                    rmd160  fb14bb7d22dfe911dd87290ef76fade42081ffd8
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/Prism.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
