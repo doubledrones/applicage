@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        uTorrent
+version                     1.0.2
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Torrent downloader
+
+homepage                    http://www.utorrent.com/
+master_sites                http://download.utorrent.com/mac/
+
+use_dmg                     yes
+distname                    uTorrent-Mac-23439
+
+checksums           md5     564411ba6bdd9ba75904ce9eaae6b9a2 \
+                    sha1    d401668029f7497cc1cff69ec1cbd09db9499a68 \
+                    rmd160  5b5c4b899e2684212ddd1b20b98fa51f18bac041
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
