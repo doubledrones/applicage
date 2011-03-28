@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        CleanMyMac
+version                     1.9.4
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     commercial
+supported_archs             i386
+
+description                 System cleanup utility
+
+homepage                    http://macpaw.com/cleanmymac
+master_sites                http://dl.macpaw.com/
+
+use_dmg                     yes
+distname                    ${name}
+
+checksums           md5     0d19d2d98c6aac840b3428eef311228e \
+                    sha1    694d4650089a9a22eb827aaa47763445068e1308 \
+                    rmd160  bd55a4f6f2aab09b1487b7c73a2dbdc04133b4bf
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
