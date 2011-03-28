@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        PYMPlayer
+version                     405b99
+platforms                   macosx
+categories                  multimedia
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Movie player based on MPlayer
+
+homepage                    http://pym.uce.pl/pymplayer.html
+master_sites                http://applicage-assets.heroku.com/
+
+use_dmg                     yes
+distname                    pymplayer${version}
+
+checksums           md5     fb1d98350dc54f634aa83fbbbb13892f \
+                    sha1    753cfddaacb73bfed42d39227c987f9bf05d3763 \
+                    rmd160  607f27c50eb3eeae4ff3bcd0b921f1b22fb38ad0
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/PYM\ Player.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
