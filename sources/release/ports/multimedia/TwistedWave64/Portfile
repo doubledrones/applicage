@@ -1,0 +1,49 @@
+PortSystem                  1.0
+
+name                        TwistedWave64
+version                     1.9.1
+platforms                   macosx
+categories                  multimedia
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 TwistedWave, an audio editor for mac.
+homepage                    http://twistedwave.com/
+master_sites                http://twistedwave.com/download/
+
+use_dmg                     yes
+distname                    ${name}-${version}
+
+checksums           md5     e53e2f19f57b93c10ef032590a763260 \
+                    sha1    f87a596907e805e2874aa82f444979adbbdbd3a0 \
+                    rmd160  07feb9851fd67e2e793e711bf7174158aa1cb61c
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/TwistedWave.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
+}
