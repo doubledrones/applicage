@@ -1,0 +1,49 @@
+PortSystem                  1.0
+
+name                        Steam
+version                     1300813107
+platforms                   macosx
+categories                  office
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Remember everything.
+homepage                    http://store.steampowered.com/
+master_sites                http://cdn.store.steampowered.com/public/client/installer/
+
+use_dmg                     yes
+distname                    steam
+
+checksums           md5     4f079940842e01c5543953832e5780a5 \
+                    sha1    82bffd15316eda4ded8ee8e99b9fa1fba4658be7 \
+                    rmd160  ed7e0f225aa82c825d74078d452bcf54fe609219
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
+}
