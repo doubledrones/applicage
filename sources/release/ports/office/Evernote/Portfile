@@ -1,0 +1,49 @@
+PortSystem                  1.0
+
+name                        Evernote
+version                     130391
+platforms                   macosx
+categories                  office
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Remember everything.
+homepage                    http://evernote.com/
+master_sites                http://evernote.s3.amazonaws.com/mac/release/
+
+use_dmg                     yes
+distname                    ${name}_${version}
+
+checksums           md5     bb9e0fcaaa2442d75f017e8d3e417a59 \
+                    sha1    cd3299a4e92434b61d5a42e32dcdff0dc4437d1d \
+                    rmd160  717b81d73336d9d42293be60b328ed8b1b74cac0
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
+}
