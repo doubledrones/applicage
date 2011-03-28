@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        Skype
+version                     5.1.0.914
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Communication
+
+homepage                    http://www.skype.com/
+master_sites                http://download.skype.com/macosx/
+
+use_dmg                     yes
+distname                    Skype_${version}
+
+checksums           md5     89506b07bafa1218c4e49f1ed5bf02f5 \
+                    sha1    02216f00d2f37bcd0f634caed8cfd46914cbd070 \
+                    rmd160  07eab64f1038313a6464f60a2684a522b28b1c82
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
