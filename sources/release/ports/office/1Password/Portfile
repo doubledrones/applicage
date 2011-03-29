@@ -1,6 +1,6 @@
 PortSystem          1.0
 
-name                1Password.app
+name                1Password
 version             3.5.9
 categories          office
 platforms           darwin
@@ -27,5 +27,5 @@ pre-fetch {
 }
 
 destroot { #TODO
-    copy ${worksrcpath} ${destroot}${applications_dir}
+    copy ${worksrcpath}.app ${destroot}${applications_dir}
 }
