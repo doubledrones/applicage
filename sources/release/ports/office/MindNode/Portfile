@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                MindNode
+version             1.6.1
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         KeyboardMaestro is a productivity application for quick macros
+homepage            http://www.mindnode.com/
+master_sites        http://www.mindnode.com/download/
+distname            MindNode
+
+checksums           md5     06ba53e1aef007cebef16ddfdc863fca \
+                    sha1    287885013e50e2418fa0adcfc1e5c49896ce66dc \
+                    rmd160  4b0d30ac2a5411f629288276f63f643b5ebf31c3
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${workpath}/${name}.app ${destroot}${applications_dir}
+}
