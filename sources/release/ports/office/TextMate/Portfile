@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                TextMate
+version             1.5.10
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         TextMate is an editor
+homepage            http://macromates.com/
+master_sites        http://download.macromates.com/
+distname            TextMate_${version}
+
+checksums           md5     24b271d66db0b9f38690ec593412bdbe \
+                    sha1    4f3f167750b14d6dd1be4e4852f60581a617a47d \
+                    rmd160  0ae8f917e51af11e2f0a57afa35fb96b28fbef6b
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${worksrcpath}.app ${destroot}${applications_dir}
+}
