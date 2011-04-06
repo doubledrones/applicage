@@ -1,0 +1,36 @@
+PortSystem                  1.0
+
+name                        Arq
+version                     1.7.5
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     commercial
+supported_archs             i386
+
+description                 Online encrypted backup for Mac using Amazon S3
+
+homepage                    http://www.haystacksoftware.com/arq/
+master_sites                http://www.haystacksoftware.com/arq/
+
+use_zip                     yes
+distname                    ${name}
+
+checksums           md5     cb934e5736a66e367424a4e4161e38c1 \
+                    sha1    b647ed535e55645130e973d09dbdb5643cf4f1b1 \
+                    rmd160  eef6c817d70eb8e27c3be02d5a7f7971caf7c0ac
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot {
+    copy ${workpath}/${name}.app ${destroot}${applications_dir}
+}
