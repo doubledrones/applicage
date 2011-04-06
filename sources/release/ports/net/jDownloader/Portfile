@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        jDownloader
+version                     0.8.174
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Movie player based on MPlayer
+
+homepage                    http://jdownloader.org/
+master_sites                http://applicage-assets.heroku.com/
+
+use_dmg                     yes
+distname                    ${name}-${version}
+
+checksums           md5     0499e848af5384e077ccf76e08f0f3bc \
+                    sha1    5a3cf0356349a7f74fb43ca1420b4637f13479a5 \
+                    rmd160  c3d85bafef35d7297fb1b9192923ea7ad79acf3c
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
