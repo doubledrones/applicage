@@ -1,6 +1,6 @@
 PortSystem          1.0
 
-name                TVShows.app
+name                TVShows
 version             0.4.8r2
 categories          multimedia
 platforms           darwin
