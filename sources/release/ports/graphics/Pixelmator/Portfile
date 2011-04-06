@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                Pixelmator
+version             1.6.5
+categories          graphics
+platforms           darwin
+maintainers         pr0d1r2
+description         Image editing for rest of us
+homepage            http://www.pixelmator.com/
+master_sites        http://applicage-assets.heroku.com/
+distname            ${name}-${version}
+
+checksums           md5     6b8d9367b8fb07c33a7fb9623f6526f2 \
+                    sha1    cdb57d0804d19b7378581166c41e0cde0e3c5030 \
+                    rmd160  af15bf4081978f322071e27d9999e3fd9acb8feb
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${worksrcpath}.app ${destroot}${applications_dir}
+}
