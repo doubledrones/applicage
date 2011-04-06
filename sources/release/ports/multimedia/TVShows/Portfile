@@ -15,7 +15,7 @@ checksums           md5     ae07631afed84e283e96e65e5d88b179 \
                     rmd160  3db40255bfb29b8174beaf231d17d6ab27fc0b90
 
 use_zip             yes
-worksrcdir          ${name}
+worksrcdir          ${name}.app
 
 configure           {}
 build               {}
@@ -28,5 +28,5 @@ pre-fetch {
 }
 
 destroot {
-    copy ${workpath}/${distname}/${name} ${destroot}${applications_dir}
+    copy ${workpath}/${distname}/${name}.app ${destroot}${applications_dir}
 }
