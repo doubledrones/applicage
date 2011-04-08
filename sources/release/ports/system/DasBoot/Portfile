@@ -1,0 +1,46 @@
+PortSystem                  1.0
+
+name                        DasBoot
+version                     2.0
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 System cleanup utility
+
+homepage                    http://subrosasoft.com/OSXSoftware/index.php?main_page=product_info&products_id=193
+master_sites                http://idisk.mac.com/mhurlow/Public/
+
+use_zip                     yes
+distname                    ${name}.dmg
+
+checksums           md5     9b9e6f30f91b56a32c5a3b5c0ee2b436 \
+                    sha1    de4145b82d8fa3609a5f39911b26c104471d9577 \
+                    rmd160  56b4de6be2bd6892f92759bbbcdadbfd2eb9440d
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${workpath}/${distname} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
