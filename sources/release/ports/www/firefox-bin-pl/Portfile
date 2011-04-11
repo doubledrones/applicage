@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        firefox-bin-pl
+version                     4.0
+platforms                   macosx
+categories                  net
+maintainers                 h13ronim
+license                     Mozilla Public License
+supported_archs             i386
+
+description                 Mozilla.org's popular stand-alone web browser
+
+homepage                    http://www.mozilla.com/pl/firefox/
+master_sites                http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${version}/mac/pl
+
+use_dmg                     yes
+distfiles                   Firefox\ ${version}.dmg
+
+checksums Firefox\ ${version}.dmg  md5     f98e942b8bb4b9bbc5c6841049e020e2 \
+                                   sha1    776ad850e0c214cf1d55c02dcc4360764970c11c \
+                                   rmd160  d886189a1a8955f5da33f1d57d7f03f3604a7d39
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach \"${distpath}/Firefox\ 4.0${extract.suffix}\" -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/Firefox.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
