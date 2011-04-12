@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ev
 
 cd `dirname $0`
 
