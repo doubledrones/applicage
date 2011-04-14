@@ -2,7 +2,7 @@ PortSystem 1.0
 PortGroup xcode 1.0
 
 name iTerm
-set svntag alpha17
+set svntag beta1
 version 2.0.0-$svntag
 categories aqua shells
 maintainers pr0d1r2
