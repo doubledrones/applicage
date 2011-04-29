@@ -1,0 +1,46 @@
+PortSystem                  1.0
+
+name                        Shimo
+version                     2.3.3
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     commercial
+supported_archs             i386
+
+description                 Best VPN client
+
+homepage                    http://www.chungwasoft.com/shimo/
+master_sites                http://www.chungwasoft.com/files/
+
+use_zip                     yes
+distname                    ${name}_${version}.dmg
+
+checksums           md5     894169aaccd9083766765fe9f023e267 \
+                    sha1    6e0b89dc5919dd43f760d58ca4c2fc90ef3dbf5b \
+                    rmd160  417f1b52ccb002ed22c6a6ecd857dac6d690c9ba
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${workpath}/${distname} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
