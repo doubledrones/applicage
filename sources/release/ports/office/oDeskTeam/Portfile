@@ -1,0 +1,52 @@
+PortSystem                  1.0
+
+name                        oDeskTeam
+version                     3.2.73
+platforms                   macosx
+categories                  office
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Jobs on oDesk.
+long_description            A free desktop application is your virtual office, enabling visibility, \
+                            connectivity, collaboration and guaranteed payment for guaranteed work.
+
+homepage                    https://www.odesk.com
+master_sites                https://www.odesk.com/downloads/mac/minor/
+
+use_dmg                     yes
+distname                    ${name}
+
+checksums           md5     34eae309e43e73ea57589145b2699fcb \
+                    sha1    21e4e2b7ef11c22510e4dc8e49b21ce6ea8f16ba \
+                    rmd160  d644b234ccbb69d6dfa7fe7868633448e10af990
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/oDesk\ Team.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
+}
