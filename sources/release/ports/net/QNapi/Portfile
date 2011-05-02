@@ -1,0 +1,48 @@
+PortSystem                  1.0
+
+name                        QNapi
+version                     0.1.6-rc2
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 System cleanup utility
+
+homepage                    http://krzemin.iglu.cz/software/qnapi
+master_sites                sourceforge:qnapi
+
+use_bzip2                   yes
+extract.suffix              .bz2
+distname                    ${name}-${version}.dmg
+
+checksums           md5     3f1b244bb20b18415b86250beddbb252 \
+                    sha1    6a388db00bbdf5c871fd7d8ea9761e8f17260938 \
+                    rmd160  070fcc18010a22a59377d966011f9563a47eb103
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+pre-destroot {
+  system "bzip2 -cd ${distpath}/${distname}${extract.suffix} > ${workpath}/${distname}"
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${workpath}/${distname} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
