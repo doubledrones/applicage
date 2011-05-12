@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        Skype
-version                     5.1.0.914
+version                     5.1.0.935
 platforms                   macosx
 categories                  net
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://download.skype.com/macosx/
 use_dmg                     yes
 distname                    Skype_${version}
 
-checksums           md5     89506b07bafa1218c4e49f1ed5bf02f5 \
-                    sha1    02216f00d2f37bcd0f634caed8cfd46914cbd070 \
-                    rmd160  07eab64f1038313a6464f60a2684a522b28b1c82
+checksums           md5     909860fc85fdb6cc6e9f6aa462d06e78 \
+                    sha1    cb677c1be808ba717f4e8afa7bf0870e856de65a \
+                    rmd160  db4fc2991f3f35f351e11d5dac7835518d3a8144
 
 use_configure               no
 
