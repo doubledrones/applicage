@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        oDeskTeam
-version                     3.2.73
+version                     3.2.77
 platforms                   macosx
 categories                  office
 maintainers                 pr0d1r2
@@ -18,9 +18,9 @@ master_sites                https://www.odesk.com/downloads/mac/minor/
 use_dmg                     yes
 distname                    ${name}
 
-checksums           md5     34eae309e43e73ea57589145b2699fcb \
-                    sha1    21e4e2b7ef11c22510e4dc8e49b21ce6ea8f16ba \
-                    rmd160  d644b234ccbb69d6dfa7fe7868633448e10af990
+checksums           md5     df3301b3d179f1c34b02cec85ac943cc \
+                    sha1    f412ed75b917ba6f7e577ef3b8db3d353cbaa7f8 \
+                    rmd160  943456fd2868974ef4abb86d149acd949feeebe4
 
 use_configure               no
 
