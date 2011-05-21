@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        Alfred
-version                     0.9_124
+version                     0.9_125
 platforms                   macosx
 categories                  office
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://media.alfredapp.com/
 use_dmg                     yes
 distname                    alfred_${version}
 
-checksums           md5     0f167b47ee89ea7ec67a622078103e41 \
-                    sha1    b3bac03897ca9bc29273babada57dc6887fceacd \
-                    rmd160  4250c1fde0be5c05aa951fc714e0e5b5f7752c56
+checksums           md5     a5454726de9f84fc9d61f4234c1a2736 \
+                    sha1    8d71557d6527810a13f0a855dee58838d74dacf1 \
+                    rmd160  abacfd7f5f829407af977d83933129871f31b427
 
 use_configure               no
 
