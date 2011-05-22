@@ -1,0 +1,28 @@
+PortSystem 1.0
+
+name			pxz
+version			20110522
+categories		archivers
+platforms		darwin
+maintainers		pr0d1r2
+description Parallel LZMA compressor using liblzma
+long_description	${description}
+default_variants +no_root
+
+fetch.type          git
+git.url             git://github.com/jnovy/pxz.git
+git.branch          537418b1a4d07d0f53c32f43e23df722321bdf69
+
+homepage		https://github.com/jnovy/pxz
+
+use_configure       no
+
+depends_lib         port:liblzma
+
+destroot {
+  file mkdir ${destroot}${prefix}/bin
+  file mkdir ${destroot}${prefix}/man/man1
+  xinstall -m 755 ${worksrcpath}/pxz ${destroot}${prefix}/bin/pxz
+  xinstall -m 644 ${worksrcpath}/pxz.1 ${destroot}${prefix}/man/man1/pxz.1
+  gzip -9 ${destroot}${prefix}/man/man1/pxz.1
+}
