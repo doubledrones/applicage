@@ -1,0 +1,50 @@
+PortSystem                  1.0
+
+name                        DaisyDisk1
+version                     1.5.3
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     commercial
+supported_archs             i386
+
+description                 See what takes up your disk space. Old version.
+
+homepage                    http://www.daisydiskapp.com/
+master_sites                http://applicage-assets.heroku.com/
+
+set proper_name             DaisyDisk
+
+use_dmg                     yes
+distname                    ${proper_name}-${version}
+
+checksums           md5     6f467969f07d6d25eda7c0372a6bc5ef \
+                    sha1    c6af0d9323e35a1c4a0bf783d0b531e4569c49f1 \
+                    rmd160  b92c4144d8d4c50f7f7bf997e7cccc3cd66363b7
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${proper_name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${proper_name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${proper_name}-${version}"
+}
+
+destroot {
+  copy /tmp/${proper_name}-${version}/${proper_name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${proper_name}-${version}"
+  file delete -force /tmp/${proper_name}-${version}
+}
