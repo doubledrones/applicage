@@ -1,0 +1,37 @@
+PortSystem          1.0
+
+set atom_name       AirFoil
+set real_name       ${atom_name}Speakers
+name                ${real_name}3
+set version_major   3
+set version_minor   5
+set version_patch   7
+version             ${version_major}.${version_minor}.${version_patch}
+categories          multimedia
+platforms           darwin
+maintainers         pr0d1r2
+description         Wireless audio around your house
+homepage            http://www.rogueamoeba.com/airfoil/mac/
+master_sites        http://rogueamoeba.com/legacy/downloads/
+distname            Airfoil-${version_major}${version_minor}${version_patch}
+
+checksums           md5     fffc8a5558e88a32aff61bfaa5851a20 \
+                    sha1    36dd21e8eb0a3cc3301c86ce5e808e84be6ca5b8 \
+                    rmd160  6afc44964d0111b249660a0da5afd80cc0e19eeb
+
+use_zip             yes
+worksrcdir          ${real_name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${workpath}/${atom_name}/${atom_name}\ Speakers.app ${destroot}${applications_dir}
+}
