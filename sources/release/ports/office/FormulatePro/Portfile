@@ -1,0 +1,45 @@
+PortSystem 1.0
+
+name			FormulatePro
+version		0.0.6
+
+categories		office
+platforms		darwin
+maintainers		pr0d1r2
+description		Overlay text and graphics on PDF documents. Great for filling out forms.
+
+homepage		http://code.google.com/p/formulatepro/
+master_sites		http://formulatepro.googlecode.com/files/
+distname		${name}-${version}
+
+checksums           md5     f2509b7046401e3da018768eb8872a2d \
+                    sha1    b5c52a58f903b1b1ec497570aca9ddef0e8ecdc3 \
+                    rmd160  c6ae4bfc255dac7e1632785eac5c6eae90d25547
+
+use_dmg		yes
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
