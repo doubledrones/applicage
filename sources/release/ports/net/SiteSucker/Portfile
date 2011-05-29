@@ -1,0 +1,36 @@
+PortSystem                  1.0
+
+name                        SiteSucker
+version                     2.3.4
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     commercial
+supported_archs             i386
+
+description                 Online encrypted backup for Mac using Amazon S3
+
+homepage                    http://www.sitesucker.us/mac.html
+master_sites                http://www.sitesucker.us/archive/latest/
+
+use_zip                     yes
+distname                    ${name}
+
+checksums           md5     b865c0e9ca9fb574b30f84e8b78721e9 \
+                    sha1    32fa10ec1ae913daac634cdb9f4c4d0050e6ad71 \
+                    rmd160  8397e16ae940d35b2e22524c2402f645cc0cd62a
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot {
+    copy ${workpath}/${name}/${name}.app ${destroot}${applications_dir}
+}
