@@ -1,0 +1,51 @@
+PortSystem                  1.0
+
+name                        LastFM
+set real_name               Last.fm
+version                     1.5.4.27088
+platforms                   macosx
+categories                  multimedia
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 Last.fm lets you effortlessly keep a record of what you listen to* from any player. \
+                            Based on your taste, Last.fm recommends you more music and concerts!
+homepage                    http://last.fm/
+master_sites                http://cdn.last.fm/client/Mac/
+
+use_dmg                     yes
+distname                    ${real_name}-${version}
+
+checksums           md5     4c3f83eedb9bad5e4fe47fe890cabdd8 \
+                    sha1    93ca60f703d07efd9fd9545933971201bd4d44ef \
+                    rmd160  24c2a912d448f7c2d3597266ab2f61426c81c233
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${real_name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
+}
