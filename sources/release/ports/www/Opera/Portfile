@@ -1,0 +1,51 @@
+PortSystem                  1.0
+
+name                        Opera
+set version_major           11
+set version_minor           11
+version                     ${version_major}.${version_minor}
+platforms                   macosx
+categories                  www
+maintainers                 pr0d1r2
+license                     freeware
+supported_archs             i386
+
+description                 WWW Browser
+homepage                    http://www.opera.com/
+master_sites                http://get8.opera.com/pub/opera/mac/1111/
+
+use_dmg                     yes
+distname                    ${name}_${version_major}.${version_minor}_Setup_Intel
+
+checksums           md5     13b4c59b47bd59807d5e0de900b231af \
+                    sha1    79da19090b59500ab4327471b303b79885b9bfcd \
+                    rmd160  5cc0e84b92767753a8c37dbd585d3b39a54e604c
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
+}
