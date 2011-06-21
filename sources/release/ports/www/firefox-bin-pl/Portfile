@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        firefox-bin-pl
-version                     4.0
+version                     4.0.1
 platforms                   macosx
 categories                  net
 maintainers                 h13ronim
@@ -16,9 +16,9 @@ master_sites                http://releases.mozilla.org/pub/mozilla.org/firefox/
 use_dmg                     yes
 distfiles                   Firefox\ ${version}.dmg
 
-checksums Firefox\ ${version}.dmg  md5     f98e942b8bb4b9bbc5c6841049e020e2 \
-                                   sha1    776ad850e0c214cf1d55c02dcc4360764970c11c \
-                                   rmd160  d886189a1a8955f5da33f1d57d7f03f3604a7d39
+checksums Firefox\ ${version}.dmg  md5     98c6900a35fdbd2d87963467cd00783d \
+                                   sha1    45b34f439c6092cb4114d1a496871269d2774a7d \
+                                   rmd160  05dc53d55a5d90fd69a31a6603d5c29efdaee794
 
 use_configure               no
 
@@ -35,7 +35,7 @@ extract {}
 
 pre-destroot {
   file mkdir /tmp/${name}-${version}
-  system "hdiutil attach \"${distpath}/Firefox\ 4.0${extract.suffix}\" -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+  system "hdiutil attach \"${distpath}/Firefox\ ${version}${extract.suffix}\" -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
 }
 
 destroot {
