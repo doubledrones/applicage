@@ -1,0 +1,33 @@
+PortSystem          1.0
+
+set real_name       Things
+name                ${real_name}Beta
+version             1.5
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         ThingsBeta.app is a productivity application for GTD system with cloud sync
+homepage            http://culturedcode.com/things/
+master_sites        http://culturedcode.com/beta/com.culturedcode.ThingsMacBeta/Things_1.5beta.zip
+distname            Things_${version}beta
+
+checksums           md5     1d100facc5facd51a59e5cc96ee14285 \
+                    sha1    b477f7888241d22df1646022949b6874cedc9107 \
+                    rmd160  a8adeadd8cbff4aea6838260772660268b1d4a16
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot { #TODO
+    copy ${workpath}/Things\ beta.app ${destroot}${applications_dir}
+}
