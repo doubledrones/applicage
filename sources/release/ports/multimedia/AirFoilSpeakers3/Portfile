@@ -32,6 +32,6 @@ pre-fetch {
     }
 }
 
-destroot { #TODO
+destroot {
     copy ${workpath}/${atom_name}/${atom_name}\ Speakers.app ${destroot}${applications_dir}
 }

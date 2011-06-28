@@ -28,6 +28,6 @@ pre-fetch {
     }
 }
 
-destroot { #TODO
+destroot {
     copy ${workpath}/Things\ beta.app ${destroot}${applications_dir}
 }

@@ -27,6 +27,6 @@ pre-fetch {
     }
 }
 
-destroot { #TODO
+destroot {
     copy ${workpath}/${name}.app ${destroot}${applications_dir}
 }

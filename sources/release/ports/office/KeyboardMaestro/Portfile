@@ -30,6 +30,6 @@ pre-fetch {
     }
 }
 
-destroot { #TODO
+destroot {
     copy ${workpath}/Keyboard\ Maestro.app ${destroot}${applications_dir}
 }

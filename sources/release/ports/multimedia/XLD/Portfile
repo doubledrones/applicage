@@ -30,6 +30,6 @@ pre-fetch {
     }
 }
 
-destroot { #TODO
+destroot {
     copy ${worksrcpath}/XLD.app ${destroot}${applications_dir}
 }

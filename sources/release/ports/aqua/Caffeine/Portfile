@@ -27,6 +27,6 @@ pre-fetch {
     }
 }
 
-destroot { #TODO
+destroot {
     copy ${workpath}/Caffeine.app ${destroot}${applications_dir}
 }
