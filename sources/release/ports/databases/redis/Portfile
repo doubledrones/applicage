@@ -4,8 +4,7 @@
 PortSystem          1.0
 
 name                redis
-version             2.2.2
-revision            0
+version             2.2.5
 categories          databases
 platforms           darwin
 
@@ -17,9 +16,9 @@ long_description    ${description}
 homepage            http://redis.io/
 master_sites        googlecode:redis
 
-checksums           md5     1c5b0d961da84a8f9b44a328b438549e \
-                    sha1    75b953e4a3067570555c5f3f5e8f481c40489904 \
-                    rmd160  a7a21ab6aa07f79e5cdeb991a26dd1d55446e38e
+checksums           md5     fe6395bbd2cadc45f4f20f6bbe05ed09 \
+                    sha1    638569b6d500bc6e02c4aef7eb39d2b22c1fc161 \
+                    rmd160  3ed09335afd92bbcaa47b59098f4edf6b15086ca
 
 patchfiles          patch-redis.c.diff
 
@@ -69,7 +68,7 @@ variant no_startupitem description {Do not create a startup item} {
     startupitem.create no
 }
 
-startupitem.create  yes
+startupitem.create  no
 startupitem.start   "${prefix}/bin/redis-server ${prefix}/etc/redis-daemon.conf"
 startupitem.stop    "echo \"SHUTDOWN\" | nc localhost 6379"
 
