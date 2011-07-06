@@ -7,6 +7,8 @@ CACHE_DIR="$HOME/Library/Caches/AppliCage"
 
 APPLICAGE_ROOT=`cd \`dirname $0\` ; pwd -P`
 
+export PATH="$MACPORTS_DIR/bin:$PATH"
+
 if [ ! -d $MACPORTS_DIR ]; then
   if [ ! -d $CACHE_DIR ]; then
     mkdir -p $CACHE_DIR
@@ -36,8 +38,6 @@ if [ ! -d $MACPORTS_DIR ]; then
 
   cd
 
-  export PATH="$MACPORTS_DIR/bin:$PATH"
-
   port -v selfupdate
 
   rm -rf /tmp/MacPorts-$MACPORTS_VERSION
@@ -52,6 +52,22 @@ CPU_NUM=`ioreg | grep CPU.@ | wc -l | sed -e 's/ //g'`
 MAKEJOBS=`expr \`expr $CPU_NUM \* 2\` + 1`
 
 echo "buildmakejobs $MAKEJOBS" > $MACPORTS_DIR/macports.conf
+
+if [ -f $HOME/.ssh/id_dsa.pub ] || [ -f $HOME/.ssh/id_rsa.pub ]; then
+  if [ ! -d $HOME/projects ]; then
+    mkdir -p $HOME/projects
+  fi
+  cd $HOME/projects
+  if [ ! -d applicage ]; then
+    port install git-core
+    git clone git@github.com:doubledrones/applicage.git
+    if [ $? -eq 0 ]; then
+      APPLICAGE_ROOT="$HOME/projects/applicage"
+    fi
+  else
+    APPLICAGE_ROOT="$HOME/projects/applicage"
+  fi
+fi
 
 cd $APPLICAGE_ROOT
 
