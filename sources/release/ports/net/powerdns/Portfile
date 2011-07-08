@@ -1,0 +1,24 @@
+PortSystem 1.0
+
+name           powerdns
+version        2.9.22
+description    The PowerDNS daemon is a versatile nameserver which supports a large number of backends.
+maintainers    h13ronim
+categories     net
+platforms      darwin
+homepage       http://powerdns.com
+master_sites   http://downloads.powerdns.com/releases/
+distname       pdns-${version}
+
+checksums           md5     8a6ff842733aca885577eb54e983a1ff \
+                    sha1    2c0888c8252299c5a17dc69eec289e90c7e8f3ff \
+                    rmd160  be9bff3edac0a9700eaf8ac30c77bfc8336b7d92
+
+patch.pre_args -p1
+patchfiles     patch-Makefile
+
+configure.cxxflags-append -DDARWIN
+configure.args --mandir=${prefix}/share/man \
+               --with-pgsql-lib=${prefix}/lib/postgresql84 \
+               --with-pgsql-includes=${prefix}/include/postgresql84 \
+               --with-modules="gpgsql"

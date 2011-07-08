@@ -1,0 +1,100 @@
+diff --git a/codedocs/Makefile b/codedocs/Makefile
+index 501f7b7..f15ac5c 100644
+--- a/codedocs/Makefile
++++ b/codedocs/Makefile
+@@ -167,7 +167,7 @@ localstatedir = ${prefix}/var
+ mandir = ${datarootdir}/man
+ mkdir_p = mkdir -p --
+ moduledirs =  mysqlbackend gmysqlbackend gpgsqlbackend xdbbackend pipebackend oraclebackend pipebackend pdnsbackend db2backend odbcbackend ldapbackend gsqlitebackend gsqlite3backend geobackend goraclebackend opendbxbackend
+-modulelibs =  -lmysqlclient -lz -lmysqlclient -lpq -lssl -lcrypto  -lcrypt   -lresolv -lnsl -ltdb  -L$(ORACLE_HOME)/lib -lclient9  -lclntst9  -lmysqlclient   -lldap_r -lsqlite -lsqlite3  -L$(ORACLE_HOME)/lib -lclient9  -lclntst9 -lopendbx
++modulelibs =  -lmysqlclient -lz -lmysqlclient -lpq -lssl -lcrypto -lresolv -ltdb  -L$(ORACLE_HOME)/lib -lclient9  -lclntst9  -lmysqlclient   -lldap_r -lsqlite -lsqlite3  -L$(ORACLE_HOME)/lib -lclient9  -lclntst9 -lopendbx
+ moduleobjects =  ../modules/mysqlbackend/mysqlcbackend.o ../modules/gmysqlbackend/gmysqlbackend.o ../modules/gmysqlbackend/smysql.o ../modules/gpgsqlbackend/gpgsqlbackend.o ../modules/gpgsqlbackend/spgsql.o ../modules/xdbbackend/xdbbackend.o ../modules/xdbbackend/xtdb.o ../modules/pipebackend/coprocess.o ../modules/pipebackend/pipebackend.o ../modules/oraclebackend/oraclebackend.o ../modules/pipebackend/coprocess.o ../modules/pipebackend/pipebackend.o ../modules/pdnsbackend/pdnsbackend.o ../modules/db2backend/DB2Backend.o ../modules/ldapbackend/ldapbackend.o ../modules/ldapbackend/powerldap.o ../modules/gsqlitebackend/gsqlitebackend.o ../modules/gsqlitebackend/ssqlite.o ../modules/gsqlite3backend/gsqlite3backend.o ../modules/gsqlite3backend/ssqlite3.o ../modules/geobackend/geobackend.o ../modules/geobackend/ippreftree.o ../modules/goraclebackend/goraclebackend.o ../modules/goraclebackend/soracle.o ../modules/opendbxbackend/odbxbackend.o ../modules/opendbxbackend/odbxprivate.o
+ oldincludedir = /usr/include
+ pdfdir = ${docdir}
+diff --git a/configure b/configure
+index 258cc83..b5b4953 100755
+--- a/configure
++++ b/configure
+@@ -23368,7 +23368,7 @@ echo "$as_me: error: The PgSQL include directory ($PGSQL_incdir) must be an abso
+ 	{ echo "$as_me:$LINENO: result: $PGSQL_incdir" >&5
+ echo "${ECHO_T}$PGSQL_incdir" >&6; }
+ 
+-#	LIBS="$LIBS -lpq++ -lpq -lssl -lcrypt -lcrypto"
++#	LIBS="$LIBS -lpq++ -lpq -lssl -lcrypto"
+ fi
+ 
+ 
+@@ -23550,7 +23550,7 @@ do
+ 		freebsd*)
+ 			;;
+ 		*)
+-			modulelibs="$modulelibs -lresolv -lnsl"
++			modulelibs="$modulelibs -lresolv"
+ 			;;
+ 		esac
+ 	fi
+diff --git a/configure.in b/configure.in
+index bf3a20a..6cad8ab 100644
+--- a/configure.in
++++ b/configure.in
+@@ -382,7 +382,7 @@ then
+ 	AC_SUBST(PGSQL_incdir)
+ 	AC_MSG_RESULT([$PGSQL_incdir])
+ 
+-#	LIBS="$LIBS -lpq++ -lpq -lssl -lcrypt -lcrypto"
++#	LIBS="$LIBS -lpq++ -lpq -lssl -lcrypto"
+ fi
+ 
+ 
+@@ -521,7 +521,7 @@ do
+ 		freebsd*)
+ 			;;
+ 		*)
+-			modulelibs="$modulelibs -lresolv -lnsl"
++			modulelibs="$modulelibs -lresolv"
+ 			;;
+ 		esac
+ 	fi
+diff --git a/modules/gpgsqlbackend/Makefile.am b/modules/gpgsqlbackend/Makefile.am
+index 7d55bc0..fb5ba87 100644
+--- a/modules/gpgsqlbackend/Makefile.am
++++ b/modules/gpgsqlbackend/Makefile.am
+@@ -7,10 +7,9 @@ INCLUDES=-I@PGSQL_incdir@
+ libgpgsqlbackend_la_SOURCES=gpgsqlbackend.cc gpgsqlbackend.hh \
+ 		spgsql.hh spgsql.cc
+ 
+-libgpgsqlbackend_la_LDFLAGS=-module -avoid-version @PGSQL_lib@ -Wl,-Bstatic -lpq \
+-	-Wl,-Bdynamic 
++libgpgsqlbackend_la_LDFLAGS=-module -avoid-version @PGSQL_lib@ -lpq
+ 
+-libgpgsqlbackend_la_LIBADD=-lssl -lcrypt -lcrypto
++libgpgsqlbackend_la_LIBADD=-lssl -lcrypto
+ 
+ 
+ 
+diff --git a/modules/gpgsqlbackend/Makefile.in b/modules/gpgsqlbackend/Makefile.in
+index 5f7f268..23e0206 100644
+--- a/modules/gpgsqlbackend/Makefile.in
++++ b/modules/gpgsqlbackend/Makefile.in
+@@ -221,10 +221,9 @@ INCLUDES = -I@PGSQL_incdir@
+ libgpgsqlbackend_la_SOURCES = gpgsqlbackend.cc gpgsqlbackend.hh \
+ 		spgsql.hh spgsql.cc
+ 
+-libgpgsqlbackend_la_LDFLAGS = -module -avoid-version @PGSQL_lib@ -Wl,-Bstatic -lpq \
+-	-Wl,-Bdynamic 
++libgpgsqlbackend_la_LDFLAGS = -module -avoid-version @PGSQL_lib@ -lpq
+ 
+-libgpgsqlbackend_la_LIBADD = -lssl -lcrypt -lcrypto
++libgpgsqlbackend_la_LIBADD = -lssl -lcrypto
+ all: all-am
+ 
+ .SUFFIXES:
+diff --git a/modules/gpgsqlbackend/OBJECTLIBS b/modules/gpgsqlbackend/OBJECTLIBS
+index 518f380..e46f09b 100644
+--- a/modules/gpgsqlbackend/OBJECTLIBS
++++ b/modules/gpgsqlbackend/OBJECTLIBS
+@@ -1,3 +1,3 @@
+--lpq -lssl -lcrypto  -lcrypt  
++-lpq -lssl -lcrypto
+ 
+ 
