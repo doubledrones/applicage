@@ -12,12 +12,12 @@ description                 Remember everything.
 homepage                    http://evernote.com/
 master_sites                http://evernote.s3.amazonaws.com/mac/release/
 
-use_dmg                     yes
+use_zip                     yes
 distname                    ${name}_${version}
 
-checksums           md5     23ac3d46d382419f86838717d504e729 \
-                    sha1    0a3cf6867fd318990a55f6c694e5170a329936f7 \
-                    rmd160  1150b2ccbd13cb09354f4734834152a41e0e047f
+checksums           md5     e972cc5659c5b5b87a42287d3c04c91f \
+                    sha1    b57acd0d193f6dd9c512d110b4d6557c162eafc9 \
+                    rmd160  2ccac70a579d40db3a8de86a47d7285f64b81fab
 
 use_configure               no
 
@@ -30,20 +30,6 @@ pre-fetch {
     }
 }
 
-extract {}
-
-pre-destroot {
-  file mkdir /tmp/${name}-${version}
-  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
-  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
-}
-
 destroot {
-  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
-}
-
-post-destroot {
-  system "hdiutil detach /tmp/${name}-${version}"
-  file delete -force /tmp/${name}-${version}
-  file delete -force /tmp/${name}-${version}.rw.dmg
+  copy ${workpath}/${name}.app ${destroot}${applications_dir}
 }
