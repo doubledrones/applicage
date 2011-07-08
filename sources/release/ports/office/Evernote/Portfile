@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        Evernote
-version                     154267
+version                     156801
 platforms                   macosx
 categories                  office
 maintainers                 pr0d1r2
@@ -15,9 +15,9 @@ master_sites                http://evernote.s3.amazonaws.com/mac/release/
 use_dmg                     yes
 distname                    ${name}_${version}
 
-checksums           md5     658d1e4987d31e36ec18e9f369736c21 \
-                    sha1    5845f7989c695720c073c99a5f7679d52e9adfdc \
-                    rmd160  8d6db3a578fbcc90f34c64b10fd69e6fcc40052d
+checksums           md5     23ac3d46d382419f86838717d504e729 \
+                    sha1    0a3cf6867fd318990a55f6c694e5170a329936f7 \
+                    rmd160  1150b2ccbd13cb09354f4734834152a41e0e047f
 
 use_configure               no
 
