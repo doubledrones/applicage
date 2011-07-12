@@ -29,3 +29,14 @@ destroot {
   file copy ${build.dir}/build/Deployment/${name}.app \
     ${destroot}${applications_dir}/${name}.app
 }
+
+pre-fetch {
+    if {"darwin" != ${os.platform}} {
+        ui_error "${name} requires Mac OS X."
+        return -code error "incompatible operating system"
+    }
+    if {${os.major} < 9} {
+        ui_error "${name} requires Mac OS X 10.5 or greater. Try iTerm instead."
+        return -code error "incompatible Mac OS X version"
+    }
+}
