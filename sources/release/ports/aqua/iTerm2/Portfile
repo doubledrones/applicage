@@ -1,7 +1,8 @@
 PortSystem 1.0
 PortGroup xcode 1.0
 
-name iTerm
+set real_name iTerm
+name ${real_name}2
 set svntag v1_0_0
 version 2.0.0-$svntag
 categories aqua shells
@@ -20,8 +21,8 @@ fetch.type svn
 svn.url http://iterm2.googlecode.com/svn/tags/$svntag/
 worksrcdir ${svntag}
 
-xcode.project ${name}.xcodeproj
-xcode.target ${name}
+xcode.project ${real_name}.xcodeproj
+xcode.target ${real_name}
 xcode.build.settings MACOSX_DEPLOYMENT_TARGET=10.5 SDKROOT=${developer_dir}/SDKs/MacOSX10.5.sdk
 
 destroot {
