@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                ReemoteServerForAirFoil
+version             1.2.2
+categories          multimedia
+platforms           darwin
+maintainers         pr0d1r2
+description         Wireless audio around your house - remote control
+homepage            http://reemoteapp.com/airfoil/
+master_sites        http://reemoteapp.com/airfoil/
+distname            ReemoteServer
+
+checksums           md5     247c53b3aec2894dd9b38dcb0cdaf27e \
+                    sha1    d360a360670ecbb3aa2d9ed2e4f8b91430ab272c \
+                    rmd160  3ef24626b38c3f5663433d6b7b3fb15c992369c3
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot {
+    copy ${workpath}/Reemote\ For\ Airfoil.app ${destroot}${applications_dir}
+}
