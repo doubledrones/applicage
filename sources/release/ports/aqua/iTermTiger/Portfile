@@ -2,38 +2,32 @@ PortSystem 1.0
 PortGroup xcode 1.0
 
 set real_name iTerm
-name ${real_name}Tiger
-set svntag v1_0_0
-version 2.0.0-$svntag
-categories aqua shells
-maintainers pr0d1r2
-description Enhanced terminal emulator program for Mac OS X
-long_description \
-  iTerm is a full featured terminal emulation program written \
-  for OS X using Cocoa. We are aiming at providing users with \
-  best command line experience under OS X. The letter i \
-  represents a native Apple look and feel of the program \
-  interface, and an emphasis on complete international support.
+name		${real_name}Tiger
+version		0.9.6
+set svntag	RC_[strsed $version {g/\./_/}]
+categories	aqua shells
+maintainers	pr0d1r2
+description	Enhanced terminal emulator program for Mac OS X
+long_description	\
+	iTerm is a full featured terminal emulation program written 	\
+	for OS X using Cocoa. We are aiming at providing users with 	\
+	best command line experience under OS X. The letter i 		\
+	represents a native Apple look and feel of the program 		\
+	interface, and an emphasis on complete international support. 
 
-homepage http://code.google.com/p/iterm2/
+homepage	http://iterm.sourceforge.net
 
 patchfiles        tiger_compatibility.diff
 
-fetch.type svn
-svn.url http://iterm2.googlecode.com/svn/tags/$svntag/
-worksrcdir ${svntag}
+fetch.type	svn
+svn.url		http://iterm.svn.sourceforge.net/svnroot/iterm/tags/$svntag/
+worksrcdir	${svntag}
 
-xcode.project ${real_name}.xcodeproj
-xcode.target ${real_name}
-#xcode.build.settings MACOSX_DEPLOYMENT_TARGET=10.4 SDKROOT=${developer_dir}/SDKs/MacOSX10.4u.sdk ARCHS="ppc" OTHER_CFLAGS="-mtune=G3 -fnested-functions"
+xcode.project	${real_name}.xcodeproj
+xcode.target	${real_name}
 xcode.build.settings MACOSX_DEPLOYMENT_TARGET=10.4 SDKROOT=${developer_dir}/SDKs/MacOSX10.4u.sdk ARCHS="ppc" OTHER_CFLAGS="-mtune=G3"
 
-post-extract {
-  copy ${filespath}/NSFastEnumerationState.h ${worksrcpath}/NSFastEnumerationState.h
-  copy ${filespath}/NSViewController.h ${worksrcpath}/NSViewController.h
-}
-
 destroot {
-  file copy ${build.dir}/build/Deployment/${name}.app \
-    ${destroot}${applications_dir}/${name}.app
+	file copy ${build.dir}/build/Deployment/${real_name}.app \
+		${destroot}${applications_dir}/${real_name}.app
 }
