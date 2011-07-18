@@ -34,4 +34,6 @@ pre-fetch {
 
 destroot {
     copy ${workpath}/${atom_name}/${atom_name}\ Speakers.app ${destroot}${applications_dir}
+    file delete ${destroot}${applications_dir}/${atom_name}\ Speakers.app/Contents/Resources/menubar_icon.png
+    copy ${filespath}/empty_menubar_icon.png ${destroot}${applications_dir}/${atom_name}\ Speakers.app/Contents/Resources/menubar_icon.png
 }
