@@ -40,4 +40,10 @@ fetch {
 
 destroot {
     copy ${worksrcpath}/${name}.app ${destroot}${applications_dir}
+    file delete ${destroot}${applications_dir}/${name}.app/Contents/resources/dropboxstatus-idle.png
+    copy ${filespath}/empty_menubar_icon.png ${destroot}${applications_dir}/${name}.app/Contents/resources/dropboxstatus-idle.png
+    file delete ${destroot}${applications_dir}/${name}.app/Contents/resources/dropboxstatus-idle-lep.png
+    copy ${filespath}/empty_menubar_icon.png ${destroot}${applications_dir}/${name}.app/Contents/resources/dropboxstatus-idle-lep.png
+    file delete ${destroot}${applications_dir}/${name}.app/Contents/resources/dropboxstatus-idle-lep2.png
+    copy ${filespath}/empty_menubar_icon.png ${destroot}${applications_dir}/${name}.app/Contents/resources/dropboxstatus-idle-lep2.png
 }
