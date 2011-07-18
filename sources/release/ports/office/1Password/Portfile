@@ -1,18 +1,19 @@
 PortSystem          1.0
 
 name                1Password
-version             3.5.9
+version             3.6.1
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
 description         1Password.app is a productivity application for easy password storage
 homepage            http://agilewebsolutions.com/onepassword
-master_sites        http://cdn.agile.ws/aws/dmg/1PW3/English/
+master_sites        http://aws.cachefly.net/dist/1P/mac/
 distname            1Password-${version}
 
-checksums           md5     78c7d48432464d1f6101c218482f0a9c \
-                    sha1    0311898d2dcea7ee88ddf95f5c409020a81a5665 \
-                    rmd160  9f8292efacfb7e644c497db3edaa1f903fe4197a
+checksums           md5     fd81c2206e5ddc2545783120e454ba25 \
+                    sha1    57f1e97e85e58ca6de0dc3396f8812385c9e71d0 \
+                    rmd160  2069c238b45d460c076f0172d6866f1c3f4d3f19
+
 use_zip             yes
 worksrcdir          ${name}
 
