@@ -29,4 +29,6 @@ pre-fetch {
 
 destroot {
     copy ${workpath}/Reemote\ For\ Airfoil.app ${destroot}${applications_dir}
+    file delete ${destroot}${applications_dir}/Reemote\ For\ Airfoil.app/Contents/resources/logo_clear.png
+    copy ${filespath}/empty_menubar_icon.png ${destroot}${applications_dir}/Reemote\ For\ Airfoil.app/Contents/resources/logo_clear.png
 }
