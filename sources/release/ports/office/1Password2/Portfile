@@ -1,0 +1,26 @@
+PortSystem          1.0
+
+set real_name       1Password
+name                ${real_name}2
+version             2.12.1
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         1Password.app is a productivity application for easy password storage, Tiger Version
+homepage            http://agilewebsolutions.com/onepassword
+master_sites        http://aws.cachefly.net/dist/1P/mac/
+distname            1Password-${version}
+
+checksums           md5     d138c77e61088f5aad2efba0a97e986b \
+                    sha1    0da2d2b98ecbca143c015a0959832f55b2547d58 \
+                    rmd160  e0a43cf103ebfab5dff4b0e186a14122774566e4
+
+use_zip             yes
+worksrcdir          ${real_name}
+
+configure           {}
+build               {}
+
+destroot {
+    copy ${worksrcpath}.app ${destroot}${applications_dir}/${name}.app
+}
