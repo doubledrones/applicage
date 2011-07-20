@@ -1,0 +1,36 @@
+PortSystem 1.0
+PortGroup xcode 1.0
+
+name UIElementInspector
+version 1.4
+categories devel
+maintainers pr0d1r2
+description Shows Accessibility API elements on applications, useful when make Apple Scripts
+long_description \
+  In this sample, the Accessibility API is used to get information about \
+  whatever AXUIElements (widgets) are under the mouse at any given time. \
+  Information can be obtained from the AXUIElement, and actions that it \
+  has can be performed.  As the mouse moves, the inspector window displays \
+  information obtained through the new API. When you then lock the inspector \
+  window on an element, you can dig deeper into the information provided by \
+  the API for that object, as well as trigger any actions that it might \
+  provide, in the interaction window. 
+
+homepage http://developer.apple.com/library/mac/#samplecode/UIElementInspector/Introduction/Intro.html
+master_sites http://applicage-assets.heroku.com/
+
+use_zip yes
+distname ${name}-${version}
+
+checksums           md5     8192d73ff38f490b55bb58894387a251 \
+                    sha1    f0a782cb94cb23bbd641f72b8465cf4fb18c05f9 \
+                    rmd160  4b3b78e23edc8215b335c5eacb0e216aa6d9b46c
+
+worksrcdir	${name}
+
+xcode.project	${name}.xcodeproj
+xcode.target	${name}
+
+destroot {
+  file copy ${build.dir}/${name}.app ${destroot}${applications_dir}/${name}.app
+}
