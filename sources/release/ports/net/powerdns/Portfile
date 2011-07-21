@@ -22,3 +22,5 @@ configure.args --mandir=${prefix}/share/man \
                --with-pgsql-lib=${prefix}/lib/postgresql84 \
                --with-pgsql-includes=${prefix}/include/postgresql84 \
                --with-modules="gpgsql"
+
+depends_lib port:boost
