@@ -1,0 +1,27 @@
+PortSystem          1.0
+
+set real_name       Caffeine
+name                ${real_name}Tiger
+version             1.0.4
+categories          aqua
+platforms           darwin
+maintainers         pr0d1r2
+description         Caffeine do not let your Mac asleep, Tiger Version
+homepage            http://lightheadsw.com/caffeine/
+master_sites        http://files.lightheadsw.com/releases/com.lightheadsw.Caffeine/
+
+distname            Caffeine${version}
+
+checksums           md5     4f35ae03ce9d98b6d023aa79c2ec1315 \
+                    sha1    d49c53afb933df6a363b4230c6d03a0d3890e739 \
+                    rmd160  9d215fb5a734bb8f7688086cd89862deeeda44ab
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+destroot {
+    copy ${workpath}/Caffeine.app ${destroot}${applications_dir}
+}
