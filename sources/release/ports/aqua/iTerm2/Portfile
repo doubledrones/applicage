@@ -2,9 +2,8 @@ PortSystem 1.0
 PortGroup xcode 1.0
 
 set real_name iTerm
-name ${real_name}2
-set svntag v1_0_0
-version 2.0.0-$svntag
+name ${real_name}
+version 2.0.0-git
 categories aqua shells
 maintainers pr0d1r2
 description Enhanced terminal emulator program for Mac OS X
@@ -17,13 +16,11 @@ long_description \
 
 homepage http://code.google.com/p/iterm2/
 
-fetch.type svn
-svn.url http://iterm2.googlecode.com/svn/tags/$svntag/
-worksrcdir ${svntag}
+fetch.type git
+git.url https://github.com/gnachman/iTerm2.git
 
 xcode.project ${real_name}.xcodeproj
 xcode.target ${real_name}
-xcode.build.settings MACOSX_DEPLOYMENT_TARGET=10.5 SDKROOT=${developer_dir}/SDKs/MacOSX10.5.sdk
 
 destroot {
   file copy ${build.dir}/build/Deployment/${name}.app \
