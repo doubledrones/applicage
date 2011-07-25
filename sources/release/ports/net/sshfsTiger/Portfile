@@ -1,0 +1,35 @@
+PortSystem                  1.0
+
+set real_name sshfs
+name                        ${real_name}Tiger
+version                     1.8
+platforms                   macosx
+categories                  net
+maintainers                 pr0d1r2
+license                     bsd
+supported_archs             ppc
+
+description                 FS over SSH, statically linked for Tiger.
+
+homepage                    http://code.google.com/p/macfuse/wiki/MACFUSE_FS_SSHFS
+master_sites                http://osxbook.com/download/sshfs/
+
+extract.suffix              .gz
+distname                    sshfs-static-tiger
+
+
+checksums           md5     5e27debfe27fa6b421defc92c63ee83f \
+                    sha1    c466ad576b5212e9d40dde2a0dd41956fbc8c3a6 \
+                    rmd160  86d15419ba09ebc8751ca7f91d36ec56838ae9a9
+
+use_configure               no
+
+build {}
+
+extract {}
+
+destroot {
+  file mkdir ${destroot}/bin
+  system "gzip -cd ${distpath}/${distname}${extract.suffix} > ${destroot}${prefix}/bin/sshfs"
+  system "chmod 755 ${destroot}${prefix}/bin/sshfs"
+}
