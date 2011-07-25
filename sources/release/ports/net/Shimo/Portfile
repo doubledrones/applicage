@@ -24,13 +24,6 @@ use_configure               no
 
 build {}
 
-pre-fetch {
-    if {${os.platform} == "darwin" && ${os.major} < 9} {
-        ui_error "${name} does only run on Mac OS X 10.5 or greater."
-        return -code error "incompatible Mac OS X version"
-    }
-}
-
 pre-destroot {
   file mkdir /tmp/${name}-${version}
   system "hdiutil attach ${workpath}/${distname} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
