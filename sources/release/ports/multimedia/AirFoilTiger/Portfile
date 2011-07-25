@@ -1,0 +1,29 @@
+PortSystem          1.0
+
+set real_name       AirFoil
+name                ${real_name}Tiger
+set version_major   3
+set version_minor   3
+set version_patch   2
+version             ${version_major}.${version_minor}.${version_patch}
+categories          multimedia
+platforms           darwin
+maintainers         pr0d1r2
+description         Wireless audio around your house
+homepage            http://www.rogueamoeba.com/airfoil/mac/
+master_sites        http://rogueamoeba.com/legacy/downloads/
+distname            Airfoil-${version_major}${version_minor}${version_patch}
+
+checksums           md5     5d63d970815a7a46a1b1062f86445ed0 \
+                    sha1    4818580de4c65a3756da1bf690f82391319c4e34 \
+                    rmd160  ce25eb35b813115fe5ec3d594522187f4bc1cb02
+
+use_zip             yes
+worksrcdir          ${real_name}
+
+configure           {}
+build               {}
+
+destroot {
+    copy ${workpath}/${real_name}/${real_name}.app ${destroot}${applications_dir}
+}
