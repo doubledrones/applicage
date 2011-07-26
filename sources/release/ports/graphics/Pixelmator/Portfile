@@ -1,18 +1,18 @@
 PortSystem          1.0
 
 name                Pixelmator
-version             1.6.5
+version             1.6.6
 categories          graphics
 platforms           darwin
-maintainers         pr0d1r2
+maintainers         pr0d1r2 h13ronim
 description         Image editing for rest of us
 homepage            http://www.pixelmator.com/
-master_sites        http://applicage-assets.heroku.com/
-distname            ${name}-${version}
+master_sites        http://pixelmator.s3.amazonaws.com/
+distname            ${name}
 
-checksums           md5     6b8d9367b8fb07c33a7fb9623f6526f2 \
-                    sha1    cdb57d0804d19b7378581166c41e0cde0e3c5030 \
-                    rmd160  af15bf4081978f322071e27d9999e3fd9acb8feb
+checksums           md5     69b750b78cfd643c02dda94360bc7e9f \
+                    sha1    24d35ebbbbe38ca3a82dc4c0439be33722f807b4 \
+                    rmd160  3ae79f692ae7b7ba679a070e17f59dd6d0d1415a
 
 use_zip             yes
 worksrcdir          ${name}
