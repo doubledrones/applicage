@@ -1,0 +1,41 @@
+PortSystem                  1.0
+
+name                        SquidMan
+version                     3.1
+platforms                   macosx
+categories                  net
+maintainers                 h13ronim
+license                     freeware
+supported_archs             i386 ppc
+
+description                 SquidMan is a MacOS X graphical installer and manager for the Squid proxy cache.
+
+homepage                    http://web.me.com/adg/squidman/index.html
+master_sites                http://web.me.com/adg/downloads/
+
+use_dmg                     yes
+distname                    ${name}${version}
+
+checksums           md5     926ce5348113bd5d41c714f3cad27a9f \
+                    sha1    183eecceb4a857eefff6a455fa505112f254defd \
+                    rmd160  41f198bbe5ff83841773c8215db3dfcc885657db
+
+use_configure               no
+
+build {}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
