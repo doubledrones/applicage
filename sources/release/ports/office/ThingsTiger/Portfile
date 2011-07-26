@@ -1,0 +1,26 @@
+PortSystem          1.0
+
+set real_name       Things
+name                ${real_name}Tiger
+version             1.4.8a
+categories          office
+platforms           darwin
+maintainers         pr0d1r2
+description         Things.app is a productivity application for GTD system, last Tiger version
+homepage            http://culturedcode.com/things/
+master_sites        http://culturedcode.cachefly.net/things/
+distname            Things_${version}
+
+checksums           md5     8942ea43324fdeb644eaf833717f28ac \
+                    sha1    5c3165e7ca6e095ae3167b56b9e843a83e8652f7 \
+                    rmd160  445cb7cc6162a089361c4a486d98453339bbb535
+
+use_zip             yes
+worksrcdir          ${real_name}
+
+configure           {}
+build               {}
+
+destroot {
+    copy ${worksrcpath}.app ${destroot}${applications_dir}
+}
