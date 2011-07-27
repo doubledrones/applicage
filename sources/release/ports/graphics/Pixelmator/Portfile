@@ -7,7 +7,8 @@ platforms           darwin
 maintainers         pr0d1r2 h13ronim
 description         Image editing for rest of us
 homepage            http://www.pixelmator.com/
-master_sites        http://pixelmator.s3.amazonaws.com/
+master_sites        http://pixelmator.s3.amazonaws.com/ \
+                    http://applicage-assets-backup.heroku.com/pixelmator-${version}/
 distname            ${name}
 
 checksums           md5     69b750b78cfd643c02dda94360bc7e9f \
