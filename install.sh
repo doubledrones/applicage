@@ -38,6 +38,7 @@ if [ ! -d $MACPORTS_DIR ]; then
 
   cd
 
+  port -v sync
   # port -v selfupdate
 
   rm -rf /tmp/MacPorts-$MACPORTS_VERSION
