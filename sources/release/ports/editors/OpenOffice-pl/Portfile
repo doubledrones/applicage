@@ -1,0 +1,49 @@
+PortSystem                  1.0
+
+set real_name               OpenOffice
+name                        OpenOffice-pl
+version                     3.3.0
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     commercial
+supported_archs             i386
+
+description                 Open Source Office package
+
+homepage                    http://pl.openoffice.org/
+master_sites                http://download.services.openoffice.org/files/localized/pl/${version}/
+
+use_dmg                     yes
+distname                    OOo_${version}_MacOS_x86_install_pl
+
+checksums           md5     5ea994d63a7f9d54ba6eab01fb207eaa \
+                    sha1    33a0f779ef17fc887e20dd637d935b294afcfdf2 \
+                    rmd160  d5824e7a8866815b0bbd80c1b36a5c2faaa987ba
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  copy /tmp/${name}-${version}/${real_name}.org.app ${destroot}${applications_dir}
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
