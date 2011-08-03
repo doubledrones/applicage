@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        Alfred
-version                     0.9.1_129
+version                     0.9.9_146
 platforms                   macosx
 categories                  office
 maintainers                 pr0d1r2
@@ -11,14 +11,14 @@ supported_archs             i386
 description                 Quick launcher
 
 homepage                    http://www.alfredapp.com/
-master_sites                http://media.alfredapp.com/
+master_sites                http://media.alfredapp.com/update/
 
-use_dmg                     yes
+use_zip                     yes
 distname                    alfred_${version}
 
-checksums           md5     5334b1a51fdde8cbfa589171f9f8b037 \
-                    sha1    147599914582d7d7d122ade1a8b5e27174fba17f \
-                    rmd160  f5ea37656e7f95a59a16a5068e82f04a01b1f19b
+checksums           md5     91c84c2838c7a5afb51f2aa90319f90d \
+                    sha1    813d172fe2b872e162e1538964bd642ac65d6746 \
+                    rmd160  25d296df350538569a8da8d583d55dbc17fa177e
 
 use_configure               no
 
@@ -31,18 +31,6 @@ pre-fetch {
     }
 }
 
-extract {}
-
-pre-destroot {
-  file mkdir /tmp/${name}-${version}
-  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
-}
-
 destroot {
-  copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
-}
-
-post-destroot {
-  system "hdiutil detach /tmp/${name}-${version}"
-  file delete -force /tmp/${name}-${version}
+  copy ${workpath}/${name}.app ${destroot}${applications_dir}
 }
