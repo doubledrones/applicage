@@ -1,0 +1,26 @@
+PortSystem          1.0
+
+name                FirestarterFX
+version             1.0RC1
+categories          sysutils
+platforms           darwin
+maintainers         pr0d1r2
+description         Making backups of your CDs and DVDs and burn them back to another media. 
+homepage            http://www.macupdate.com/app/mac/11417/firestarter-fx
+master_sites        http://applicage-assets.heroku.com/
+
+distname            FireStarter_FX-${version}
+
+checksums           md5     a58d23fcec861220d27ead9fd3aee736 \
+                    sha1    f126e4d3da7089f6bc3620490dc0b8f18bae2b00 \
+                    rmd160  151bfdff7395217944c74687a6751de92d9c0fcd
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+destroot {
+    copy ${workpath}/FireStarter_FX-${version}/Firestarter\ FX.app ${destroot}${applications_dir}
+}
