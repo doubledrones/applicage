@@ -1,7 +1,7 @@
 PortSystem          1.0
 
 name                Mactracker
-version             5.3
+version             6.1
 categories          docs
 platforms           darwin
 maintainers         pr0d1r2
@@ -10,9 +10,9 @@ homepage            http://www.mactracker.ca/
 master_sites        http://www.mactracker.ca/downloads/
 distname            Mactracker_${version}
 
-checksums           md5     9822cc84899a5e29dadf91f8e004ff54 \
-                    sha1    f5555422de27c37eb087ceb48a3c74b067c6ed09 \
-                    rmd160  fec74fe8bbfb664c088bca8bf7f694020e415340
+checksums           md5     6cee3d7deb8a96d8a329ccd51f9c988f \
+                    sha1    636e2175338b5fca1fedabb374dfff17001863c0 \
+                    rmd160  59d1ad93bb99a91d4ecfaae120f034e9ee1b11cd
 
 use_zip             yes
 worksrcdir          ${name}
