@@ -1,7 +1,8 @@
 PortSystem                  1.0
 
 name                        Alfred
-version                     0.9.9_146
+version                     0.9.10
+set subversion              152
 platforms                   macosx
 categories                  office
 maintainers                 pr0d1r2
@@ -11,14 +12,14 @@ supported_archs             i386
 description                 Quick launcher
 
 homepage                    http://www.alfredapp.com/
-master_sites                http://media.alfredapp.com/update/
+master_sites                http://media.alfredapp.com/update/a${subversion}/
 
 use_zip                     yes
-distname                    alfred_${version}
+distname                    alfred_${version}_${subversion}
 
-checksums           md5     91c84c2838c7a5afb51f2aa90319f90d \
-                    sha1    813d172fe2b872e162e1538964bd642ac65d6746 \
-                    rmd160  25d296df350538569a8da8d583d55dbc17fa177e
+checksums           md5     d11a04d87e6be5893135d5f31b8926b9 \
+                    sha1    00333ff205a30b3e50554ff64ebc3883709c2bc6 \
+                    rmd160  650ed1ed40710b975adb14d02820ba32d65840a1
 
 use_configure               no
 
