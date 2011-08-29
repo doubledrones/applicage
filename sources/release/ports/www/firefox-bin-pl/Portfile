@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        firefox-bin-pl
-version                     4.0.1
+version                     6.0
 platforms                   macosx
 categories                  net
 maintainers                 h13ronim
@@ -16,9 +16,9 @@ master_sites                http://releases.mozilla.org/pub/mozilla.org/firefox/
 use_dmg                     yes
 distfiles                   Firefox\ ${version}.dmg
 
-checksums Firefox\ ${version}.dmg  md5     98c6900a35fdbd2d87963467cd00783d \
-                                   sha1    45b34f439c6092cb4114d1a496871269d2774a7d \
-                                   rmd160  05dc53d55a5d90fd69a31a6603d5c29efdaee794
+checksums Firefox\ ${version}.dmg         md5     bd1c7aa3902e3e2e0fadbf00011430f8 \
+                                          sha1    280d7c97f5d3efc251005e603ac53c1160a1d144 \
+                                          rmd160  01c5a298749c7559f092194d00e8ded112a8dc57
 
 use_configure               no
 
