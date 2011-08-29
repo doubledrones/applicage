@@ -2,8 +2,8 @@ PortSystem 1.0
 PortGroup xcode 1.0
 
 set real_name iTerm
-name ${real_name}
-version 2.0.0-git
+name ${real_name}2
+version 1.0.0.20110828
 categories aqua shells
 maintainers pr0d1r2
 description Enhanced terminal emulator program for Mac OS X
@@ -18,12 +18,13 @@ homepage http://code.google.com/p/iterm2/
 
 fetch.type git
 git.url https://github.com/gnachman/iTerm2.git
+git.branch v${version}
 
 xcode.project ${real_name}.xcodeproj
 xcode.target ${real_name}
 
 destroot {
-  file copy ${build.dir}/build/Deployment/${name}.app \
+  file copy ${build.dir}/build/Deployment/${real_name}.app \
     ${destroot}${applications_dir}/${name}.app
 }
 
