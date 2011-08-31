@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MACPORTS_DIR="$HOME/.macports"
-MACPORTS_VERSION="1.9.2"
+MACPORTS_VERSION="2.0.1"
 
 CACHE_DIR="$HOME/Library/Caches/AppliCage"
 
