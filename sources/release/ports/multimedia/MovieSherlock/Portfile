@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        MovieSherlock
-version                     3.5.0
+version                     4.2.2
 platforms                   macosx
 categories                  multimedia
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://www.moviesherlock.com/download/
 use_zip                     yes
 distname                    ${name}_${version}
 
-checksums           md5     e2edf59e78446e7484f9a6c9c7ed993d \
-                    sha1    c154908efe5355ae43d59f4f836e1ec108326573 \
-                    rmd160  0725ba62d84028e3fb3553664550020fc92a7534
+checksums           md5     3fa06a22d81d561f42dabc450ca07f84 \
+                    sha1    e2a59eab3426fd2ba6eff5596b9d21269da838f2 \
+                    rmd160  dac69c3643a35291ad7e648cedcd5396178ae271
 
 use_configure               no
 
@@ -37,7 +37,7 @@ pre-destroot {
 }
 
 destroot {
-  system "gzip -cd /tmp/MovieSherlock-3.5.0/MovieSherlock.pkg/Contents/Packages/moviesherlock.pkg/Contents/Archive.pax.gz | pax -rvf -"
+  system "gzip -cd /tmp/${name}-${version}/MovieSherlock.pkg/Contents/Packages/moviesherlock.pkg/Contents/Archive.pax.gz | pax -rvf -"
   system "mv ${name}.app ${destroot}${applications_dir}"
 }
 
