@@ -1,7 +1,7 @@
 PortSystem          1.0
 
 name                1Password
-version             3.8.5
+version             3.8.6
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
@@ -10,9 +10,9 @@ homepage            http://agilewebsolutions.com/onepassword
 master_sites        http://aws.cachefly.net/dist/1P/mac/
 distname            1Password-${version}
 
-checksums           md5     b024f95a22d6c926b2db3611ed633cee \
-                    sha1    3ca4bf22d005784651b4ff461ea3a5f8ca5546aa \
-                    rmd160  327ab3553dcbaa5f4d0f6bce58325bb6f616e7a4
+checksums           md5     cc8044afa1ef6543088af795194584f5 \
+                    sha1    69774b8b9505461f6805387325edcf1b1e880e4b \
+                    rmd160  e00f172753c0aac2a58e7c916b6a34eeba1108ca
 
 use_zip             yes
 worksrcdir          ${name}
