@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        uTorrent
-version                     1.0.2
+version                     1.0.3
 platforms                   macosx
 categories                  net
 maintainers                 pr0d1r2
@@ -14,11 +14,11 @@ homepage                    http://www.utorrent.com/
 master_sites                http://download.utorrent.com/mac/
 
 use_dmg                     yes
-distname                    uTorrent-Mac-23439
+distname                    uTorrent-Mac-23545
 
-checksums           md5     564411ba6bdd9ba75904ce9eaae6b9a2 \
-                    sha1    d401668029f7497cc1cff69ec1cbd09db9499a68 \
-                    rmd160  5b5c4b899e2684212ddd1b20b98fa51f18bac041
+checksums           md5     d00ee7086a686ef8d8fa5b69f2e2f365 \
+                    sha1    c43111049939ab46cb506e39c79cb7494d5df2a3 \
+                    rmd160  e9d77bd4779fc1b47658f80e7889de5ef66da557
 
 use_configure               no
 
@@ -29,6 +29,13 @@ pre-fetch {
         ui_error "${name} does only run on Mac OS X 10.5 or greater."
         return -code error "incompatible Mac OS X version"
     }
+}
+
+fetch {
+    if {![file isdirectory ${distpath}]} {
+        file mkdir ${distpath}
+    }
+    system "curl -C - ${master_sites}${distname}${extract.suffix} -o ${distpath}/${distname}${extract.suffix}"
 }
 
 extract {}
