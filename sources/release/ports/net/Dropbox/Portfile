@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        Dropbox
-version                     1.1.35
+version                     1.1.45
 platforms                   macosx
 categories                  net
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://cdn.dropbox.com/
 use_dmg                     yes
 distname                    ${name}-${version}
 
-checksums           md5     057ec2024c0cab07303d98dde9d8e212 \
-                    sha1    4da6ed7242044b8a1f218e6266cf2b0152d530ed \
-                    rmd160  e587975aa5c3326f7f320904e3d05695ab9cca35
+checksums           md5     3037fa66c5585cbdf2bda28848a97d46 \
+                    sha1    2aea80cbf9f75456a7a3ecd617b4e316d6a53c01 \
+                    rmd160  8c003e940583c113b68d6b8f4d77891282318db0
 
 use_configure               no
 
