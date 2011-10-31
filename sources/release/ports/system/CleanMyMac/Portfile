@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        CleanMyMac
-version                     1.9.5
+version                     1.10.1
 platforms                   macosx
 categories                  system
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://dl.macpaw.com/
 use_dmg                     yes
 distname                    ${name}
 
-checksums           md5     657f4bf9961cf099177db3acf0ce5ede \
-                    sha1    03a3f8514fca78708c3c0e9d764c50f48614b374 \
-                    rmd160  139c24185cda9ab783146d99e6f9c7545b531e4b
+checksums           md5     d39fe5930ecb468e9e53e61a2f5ab226 \
+                    sha1    d0205c64eee12164a478bad4b0f9c5e45eb002dc \
+                    rmd160  2454795acd16de39571e3acacdc7e2eb5f02d600
 
 use_configure               no
 
