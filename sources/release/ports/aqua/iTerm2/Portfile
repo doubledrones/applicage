@@ -3,7 +3,7 @@ PortGroup xcode 1.0
 
 set real_name iTerm
 name ${real_name}2
-version 1.0.0.20110909
+version 1.0.0.20111009
 categories aqua shells
 maintainers pr0d1r2
 description Enhanced terminal emulator program for Mac OS X
