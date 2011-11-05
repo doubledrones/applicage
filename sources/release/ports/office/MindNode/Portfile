@@ -1,7 +1,7 @@
 PortSystem          1.0
 
 name                MindNode
-version             1.7.2
+version             1.7.4
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
@@ -10,9 +10,9 @@ homepage            http://www.mindnode.com/
 master_sites        http://www.mindnode.com/download/
 distname            MindNode
 
-checksums           md5     f17fc10d317c9528173b402138a3b77a \
-                    sha1    b5d5b80a976bf90cf7f9886f1fe246fa4f4f0f5c \
-                    rmd160  e48489a6ab1d77200bb5a58453ecd883ae7a129d
+checksums           md5     e2f7098c6d786b8b412ec12c3722051a \
+                    sha1    149099fd33845183c081abf821b3944b61c4070e \
+                    rmd160  577a6e26a510e4f151944d0082094b916450d94d
 
 use_zip             yes
 worksrcdir          ${name}
