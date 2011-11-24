@@ -1,0 +1,31 @@
+PortSystem                  1.0
+
+name                        Gitifier
+version                     1.2
+platforms                   macosx
+categories                  devel
+maintainers                 pr0d1r2
+license                     GPL
+supported_archs             i386
+
+description                 Git commit notifier for MacOSX
+
+homepage                    http://psionides.github.com/Gitifier/
+master_sites                http://github.com/downloads/psionides/Gitifier/
+
+use_zip                     yes
+distname                    ${name}-${version}
+
+checksums           md5     0bf2071365cffdc6cb221ee514f0d245 \
+                    sha1    10259c80e404cd2c7c495a10ec0da65b20066296 \
+                    rmd160  a71adc09f3a8e09606d988b4ef3c9a669dc80a95
+
+use_configure               no
+
+build {}
+
+destroot {
+  copy ${workpath}/${name}.app ${destroot}${applications_dir}
+  file delete ${destroot}${applications_dir}/${name}.app/Contents/Resources/icon_menu.png
+  copy ${filespath}/empty_menubar_icon.png ${destroot}${applications_dir}/${name}.app/Contents/Resources/icon_menu.png
+}
