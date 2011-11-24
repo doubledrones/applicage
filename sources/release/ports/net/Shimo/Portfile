@@ -31,6 +31,8 @@ pre-destroot {
 
 destroot {
   copy /tmp/${name}-${version}/${name}.app ${destroot}${applications_dir}
+    file delete ${destroot}${applications_dir}/${name}.app/Contents/resources/shimo_menu_connected.tif
+    copy ${filespath}/empty_menubar_icon.tif ${destroot}${applications_dir}/${name}.app/Contents/resources/shimo_menu_connected.tif
 }
 
 post-destroot {
