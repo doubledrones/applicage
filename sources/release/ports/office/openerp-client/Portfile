@@ -1,0 +1,39 @@
+PortSystem                  1.0
+
+name                        openerp-client
+version                     6.0.3
+platforms                   macosx
+categories                  office
+maintainers                 pr0d1r2
+license                     GPL
+supported_archs             i386 x86_64
+
+description                 Open Source Business Applications client
+
+homepage                    http://www.openerp.com/
+master_sites                http://www.openerp.com/download/stable/source/
+
+distname                    ${name}-${version}
+
+checksums           md5     81d96ef7fb7650d77c00f4f135a60c5f \
+                    sha1    87c2cb1771e97c75cdd7b78adfbf859e9935b15e \
+                    rmd160  b52abe97602ceeac0139e0a6b1ac659253bbcba3
+
+depends_run                 port:python26 \
+                            port:py26-gtk \
+                            port:py26-gd \
+                            port:gdk-pixbuf \
+                            port:graphviz \
+                            port:py26-pydot \
+                            port:py26-lxml \
+                            port:py26-dateutil \
+                            port:py26-matplotlib
+
+
+use_configure               no
+
+build {}
+
+destroot {
+  copy ${workpath}/${name}-${version}/bin ${destroot}${applications_dir}/OpenERP
+}
