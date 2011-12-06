@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MACPORTS_DIR="$HOME/.macports"
-MACPORTS_VERSION="2.0.1"
+MACPORTS_VERSION="2.0.3"
 
 CACHE_DIR="$HOME/Library/Caches/AppliCage"
 
@@ -39,7 +39,7 @@ if [ ! -d $MACPORTS_DIR ]; then
   cd
 
   port -v sync
-  # port -v selfupdate
+  port -v selfupdate
 
   rm -rf /tmp/MacPorts-$MACPORTS_VERSION
 fi
@@ -80,7 +80,6 @@ fi
 
 cd $MACPORTS_SOURCE_DIR/release/ports || exit $?
 portindex
-
 
 DEFAULT_SOURCES_LINE1="rsync://rsync.macports.org/release/tarballs/ports.tar [default]"
 DEFAULT_SOURCES_LINE2="rsync://rsync.macports.org/release/ports/ [default]"
