@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        uTorrent
-version                     1.0.3
+version                     1.5.11
 platforms                   macosx
 categories                  net
 maintainers                 pr0d1r2
@@ -14,11 +14,11 @@ homepage                    http://www.utorrent.com/
 master_sites                http://download.utorrent.com/mac/
 
 use_dmg                     yes
-distname                    uTorrent-Mac-23545
+distname                    uTorrent-Mac-25801
 
-checksums           md5     d00ee7086a686ef8d8fa5b69f2e2f365 \
-                    sha1    c43111049939ab46cb506e39c79cb7494d5df2a3 \
-                    rmd160  e9d77bd4779fc1b47658f80e7889de5ef66da557
+checksums           md5     d7b4c2c20b8e4cce1f2c1100af8dab6a \
+                    sha1    159df41f4f02a8b7628a90290724e28879f5ba25 \
+                    rmd160  a880336c710d2a45a1310df0551793448f4d478f
 
 use_configure               no
 
@@ -31,18 +31,12 @@ pre-fetch {
     }
 }
 
-fetch {
-    if {![file isdirectory ${distpath}]} {
-        file mkdir ${distpath}
-    }
-    system "curl -C - ${master_sites}${distname}${extract.suffix} -o ${distpath}/${distname}${extract.suffix}"
-}
-
 extract {}
 
 pre-destroot {
   file mkdir /tmp/${name}-${version}
-  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+  system "hdiutil convert -ov -format UDRW -o /tmp/${name}-${version}.rw.dmg ${distpath}/${distname}${extract.suffix}"
+  system "hdiutil attach /tmp/${name}-${version}.rw.dmg -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
 }
 
 destroot {
@@ -52,4 +46,5 @@ destroot {
 post-destroot {
   system "hdiutil detach /tmp/${name}-${version}"
   file delete -force /tmp/${name}-${version}
+  file delete -force /tmp/${name}-${version}.rw.dmg
 }
