@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        uTorrent
-version                     1.5.11
+version                     1.5.12
 platforms                   macosx
 categories                  net
 maintainers                 pr0d1r2
@@ -14,11 +14,11 @@ homepage                    http://www.utorrent.com/
 master_sites                http://download.utorrent.com/mac/
 
 use_dmg                     yes
-distname                    uTorrent-Mac-25801
+distname                    uTorrent-Mac-26576
 
-checksums           md5     d7b4c2c20b8e4cce1f2c1100af8dab6a \
-                    sha1    159df41f4f02a8b7628a90290724e28879f5ba25 \
-                    rmd160  a880336c710d2a45a1310df0551793448f4d478f
+checksums           md5     634b5495b220265d14f75fc10a1bf887 \
+                    sha1    e827facb9e93e617e546f5aa0788fd0d2b073f8d \
+                    rmd160  ac62b4381286521fa5e1edf63a65208eee3fdde4
 
 use_configure               no
 
