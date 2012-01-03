@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        Dropbox
-version                     1.1.45
+version                     1.1.49
 platforms                   macosx
 categories                  net
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://cdn.dropbox.com/
 use_dmg                     yes
 distname                    ${name}-${version}
 
-checksums           md5     3037fa66c5585cbdf2bda28848a97d46 \
-                    sha1    2aea80cbf9f75456a7a3ecd617b4e316d6a53c01 \
-                    rmd160  8c003e940583c113b68d6b8f4d77891282318db0
+checksums           md5     630578359d51d819c39d8ac944e5a8dc \
+                    sha1    1f859cee4708b8db40558e43eb9f28fc2f272a71 \
+                    rmd160  739ec841a3759d37ab174fca7006ab4c45f91ed1
 
 use_configure               no
 
@@ -35,7 +35,7 @@ fetch {
     if {![file isdirectory ${distpath}]} {
         file mkdir ${distpath}
     }
-    system "curl ${master_sites}${name}%20${version}${extract.suffix} -o ${distpath}/${distname}${extract.suffix}"
+    system "curl -L https://www.dropbox.com/download?plat=mac -o ${distpath}/${distname}${extract.suffix}"
 }
 
 destroot {
