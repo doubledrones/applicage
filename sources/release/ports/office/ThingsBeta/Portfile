@@ -2,18 +2,18 @@ PortSystem          1.0
 
 set real_name       Things
 name                ${real_name}Beta
-version             1.5
+version             1.6
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
 description         ThingsBeta.app is a productivity application for GTD system with cloud sync
 homepage            http://culturedcode.com/things/
-master_sites        http://culturedcode.com/beta/com.culturedcode.ThingsMacBeta/Things_1.5beta.zip
+master_sites        http://culturedcode.com/beta/com.culturedcode.ThingsMacBeta/
 distname            Things_${version}beta
 
-checksums           md5     1d100facc5facd51a59e5cc96ee14285 \
-                    sha1    b477f7888241d22df1646022949b6874cedc9107 \
-                    rmd160  a8adeadd8cbff4aea6838260772660268b1d4a16
+checksums           md5     4fed6262f7dca57400a1f19904d14bcb \
+                    sha1    73ad89dbe19712bf905ab0370b01dcf1348b75d5 \
+                    rmd160  2a09762dce5cf16bab04433ce66f79f2aead0a27
 
 use_zip             yes
 worksrcdir          ${name}
