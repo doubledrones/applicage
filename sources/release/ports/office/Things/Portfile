@@ -1,7 +1,7 @@
 PortSystem          1.0
 
 name                Things
-version             1.5.1
+version             1.5.4
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
@@ -10,9 +10,9 @@ homepage            http://culturedcode.com/things/
 master_sites        http://culturedcode.cachefly.net/things/
 distname            Things_${version}
 
-checksums           md5     9f6b3efb3fd044908244c0f19abb74ac \
-                    sha1    3957bfd463351412d9aa203211213cc4da48a02f \
-                    rmd160  3b9c501b2b6f5d44fe27c79dd000bd994170d278
+checksums           md5     6d5e8888456b240be928295ab754808d \
+                    sha1    7611fbd16e830b3f937a1e8df12fb213d4fafad6 \
+                    rmd160  5421e7ec213d051f4fa1cb3a2d94f219bfca8004
 
 use_zip             yes
 worksrcdir          ${name}
