@@ -2,7 +2,8 @@ PortSystem          1.0
 
 set real_name       Things
 name                ${real_name}Beta
-version             1.6 # 1.6b18
+# precise version is 1.6b18
+version             1.6
 categories          office
 platforms           darwin
 maintainers         pr0d1r2
