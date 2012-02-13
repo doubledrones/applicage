@@ -1,0 +1,32 @@
+PortSystem          1.0
+
+name                Propane
+version             1.2.0
+categories          net
+platforms           darwin
+maintainers         h13ronim
+description         Propane.app is a standalone application for Campfire
+homepage            http://propaneapp.com/
+master_sites        http://propaneapp.com/appcast
+distname            Propane
+
+checksums           md5     734bc06d173af9fea96a2aaa9b63d47b \
+                    sha1    3c64d3a4c9095f52921c843b29013d76fb4dba58 \
+                    rmd160  a0fc893d20a4244cbc545776b6442c150ddd32a2
+
+use_zip             yes
+worksrcdir          ${name}
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot {
+    copy ${worksrcpath}.app ${destroot}${applications_dir}
+}
