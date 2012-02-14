@@ -1,0 +1,36 @@
+PortSystem                  1.0
+
+name                        chromedriver
+version                     18.0.995.0
+platforms                   macosx
+categories                  system
+maintainers                 pr0d1r2
+license                     MIT
+supported_archs             i386
+
+description                 An open-source browser project to help move the web forward. Selenium driver.
+
+homepage                    http://code.google.com/p/chromium/
+master_sites                http://chromium.googlecode.com/files/
+
+use_zip                     yes
+distname                    ${name}_mac_${version}
+
+checksums           md5     541717ffc6427508b06a07dd3befd2d6 \
+                    sha1    5ff64a13d56ad6b95a2c9d430f357d72064a6d7d \
+                    rmd160  614aa11f8714b12c14d4908be09e8480d7b3307c
+
+use_configure               no
+
+build {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+destroot {
+    copy ${workpath}/chromedriver ${destroot}${applications_dir}
+}
