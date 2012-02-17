@@ -4,7 +4,7 @@ name                        chromedriver
 version                     18.0.995.0
 platforms                   macosx
 categories                  system
-maintainers                 pr0d1r2
+maintainers                 pr0d1r2 h13ronim
 license                     MIT
 supported_archs             i386
 
@@ -32,5 +32,5 @@ pre-fetch {
 }
 
 destroot {
-    copy ${workpath}/chromedriver ${destroot}${applications_dir}
+  xinstall -m 755 ${workpath}/chromedriver ${destroot}${prefix}/bin/chromedriver
 }
