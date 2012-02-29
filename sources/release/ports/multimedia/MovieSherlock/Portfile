@@ -1,7 +1,7 @@
 PortSystem                  1.0
 
 name                        MovieSherlock
-version                     4.5.3
+version                     4.6.0
 platforms                   macosx
 categories                  multimedia
 maintainers                 pr0d1r2
@@ -16,9 +16,9 @@ master_sites                http://www.moviesherlock.com/download/
 use_zip                     yes
 distname                    ${name}_${version}
 
-checksums           md5     2507f1cc241c58d2f8dd5abbcb924380 \
-                    sha1    a6c55603bcdf7d2c0ad8de5dbf177e1fc6eb9da7 \
-                    rmd160  ace5eb72d7d9a03b1e97545592e18fdacd3af763
+checksums           md5     ae640251f086e971705bd37c65fb9d70 \
+                    sha1    5cf96cea21818815c73c1506ac6e67f52836285f \
+                    rmd160  b6be6e2542adbfee4455755f94212471f4660028
 
 use_configure               no
 
