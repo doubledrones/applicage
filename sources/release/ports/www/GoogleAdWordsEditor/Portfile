@@ -1,0 +1,49 @@
+PortSystem 1.0
+
+name			GoogleAdWordsEditor
+version		9.7.1
+
+categories		www
+platforms		darwin
+maintainers		pr0d1r2
+description		AdWords Editor is a free, downloadable application for managing your AdWords advertising campaigns.
+
+homepage		http://dl.google.com/adwords_editor/9.7.1/mac/en-US/
+master_sites		http://www.google.com/intl/en/adwordseditor/index.htmlhttp://formulatepro.googlecode.com/files/
+distname		AdWords-Editor-${version}-en-US
+
+checksums           md5     fd0c5bbb7551b6de8eee2a4fec165c4e \
+                    sha1    7bf723396026be56bd082e17a97a994e2a72db7c \
+                    rmd160  0c54e473b3625a1114930a1f5c6f85dc3bcf47c9
+
+depends_run         port:xulrunner-devel
+
+
+use_dmg		yes
+
+configure           {}
+build               {}
+
+pre-fetch {
+    if {${os.platform} == "darwin" && ${os.major} < 9} {
+        ui_error "${name} does only run on Mac OS X 10.5 or greater."
+        return -code error "incompatible Mac OS X version"
+    }
+}
+
+extract {}
+
+pre-destroot {
+  file mkdir /tmp/${name}-${version}
+  system "hdiutil attach ${distpath}/${distname}${extract.suffix} -private -readonly -nobrowse -mountpoint /tmp/${name}-${version}"
+}
+
+destroot {
+  system "gzip -cd /tmp/${name}-${version}/AdWords-Editor-${version}-en-US.pkg/Contents/Packages/moviesherlock.pkg/Contents/Archive.pax.gz | pax -rvf -"
+  system "mv Applications/AdWords\ Editor.app ${destroot}${applications_dir}"
+}
+
+post-destroot {
+  system "hdiutil detach /tmp/${name}-${version}"
+  file delete -force /tmp/${name}-${version}
+}
