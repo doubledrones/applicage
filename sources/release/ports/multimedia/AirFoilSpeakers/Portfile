@@ -4,8 +4,8 @@ set atom_name       AirFoil
 set real_name       ${atom_name}Speakers
 name                ${real_name}
 set version_major   4
-set version_minor   6
-set version_patch   2
+set version_minor   7
+set version_patch   0
 version             ${version_major}.${version_minor}.${version_patch}
 categories          multimedia
 platforms           darwin
@@ -15,9 +15,9 @@ homepage            http://www.rogueamoeba.com/airfoil/mac/
 master_sites        http://rogueamoeba.com/airfoil/download/
 distname            Airfoil
 
-checksums           md5     0f216d6b70c27547b7b652e9e16383fd \
-                    sha1    20fedb43c1cd46cf7db02170db02101c2b165c49 \
-                    rmd160  0d8887b0d534a8ab495e0696b7aa2e5e7a8fc041
+checksums           md5     74bee9b5d711b5bcb041de4da81e6019 \
+                    sha1    04a12e17a28041a901831f73d9122434a4462490 \
+                    rmd160  759b4b7a3c503e67b94014207c3a131a15d188d6
 
 use_zip             yes
 worksrcdir          ${real_name}
