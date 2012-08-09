@@ -19,8 +19,8 @@ patchfiles     patch-Makefile
 
 configure.cxxflags-append -DDARWIN
 configure.args --mandir=${prefix}/share/man \
-               --with-pgsql-lib=${prefix}/lib/postgresql84 \
-               --with-pgsql-includes=${prefix}/include/postgresql84 \
+               --with-pgsql-lib=${prefix}/lib/postgresql91 \
+               --with-pgsql-includes=${prefix}/include/postgresql91 \
                --with-modules="gpgsql"
 
 depends_lib port:boost
